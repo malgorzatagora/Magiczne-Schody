@@ -12,6 +12,7 @@ namespace MagiczneSchody
 		TEST_METHOD(TestMethod1)
 		{
 			//zmiana
+			//zmiana2
 		}
 
 	};
