@@ -11,7 +11,7 @@ namespace MagiczneSchody
 		
 		TEST_METHOD(TestMethod1)
 		{
-			// TODO: W tym miejscu dodaj kod testowy
+			//zmiana
 		}
 
 	};
