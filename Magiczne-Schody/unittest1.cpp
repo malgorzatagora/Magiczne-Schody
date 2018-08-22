@@ -14,6 +14,7 @@ namespace MagiczneSchody
 			//zmiana
 			//zmiana2
 			//gosia ma juz VS
+			//Pawel niezmiernie sie cieszy
 		}
 
 	};
