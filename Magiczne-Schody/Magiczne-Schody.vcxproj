@@ -168,6 +168,7 @@
     </ClCompile>
     <ClCompile Include="unittest1.cpp" />
     <ClCompile Include="UT_I2C.cpp" />
+    <ClCompile Include="UT_PCA9685.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
