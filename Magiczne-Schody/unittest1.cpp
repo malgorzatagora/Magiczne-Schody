@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include "CircularBuffer.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -15,6 +16,18 @@ namespace MagiczneSchody
 			//zmiana2
 			//gosia ma juz VS
 			//Pawel niezmiernie sie cieszy
+		}
+
+	};
+
+	TEST_CLASS(CircularBufferTest)
+	{
+	public:
+
+		TEST_METHOD(TM_AddCharacter)
+		{
+			CircularBuffer newBuffer;
+			//Assert::AreEqual(SUCCESS, newBuffer.AddCharacter('a'));
 		}
 
 	};
