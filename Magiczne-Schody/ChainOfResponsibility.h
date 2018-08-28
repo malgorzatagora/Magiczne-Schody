@@ -9,4 +9,31 @@
 
 #pragma once
 
+
+class Chain
+{
+	Chain *next;
+public:
+	Chain()
+	{
+		next = 0;
+	}
+	void setNext(Chain *n)
+	{
+		next = n;
+	}
+	void add(Chain *n)
+	{
+		if (next)
+			next->add(n);
+		else
+			next = n;
+	}
+	virtual void execute(int i)
+	{
+		next->execute(i);
+	}
+};
+
 //placeholder 
+
