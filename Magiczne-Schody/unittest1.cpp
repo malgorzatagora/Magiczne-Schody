@@ -26,7 +26,7 @@ namespace MagiczneSchody
 
 		TEST_METHOD(TM_AddCharacter)
 		{
-			CircularBuffer newBuffer;
+			CircularBuffer newBuffer(10);
 			//Assert::AreEqual(SUCCESS, newBuffer.AddCharacter('a'));
 		}
 

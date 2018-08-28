@@ -9,22 +9,23 @@
 
 #pragma once
 #include "ICircularBuffer.h"
-constexpr auto BUFFER_SIZE = 10;
 constexpr auto TERMINATOR = '\n';
 
 class CircularBuffer: public ICircularBuffer
 {
 public:
-	CircularBuffer();
+	CircularBuffer(int bufferSize);
 	~CircularBuffer();
 	eCurcularBufferErrorCode AddCharacter(char a);
 	bool IsCommandAvailable();
 	eCurcularBufferErrorCode GetCommand(char *command);
 
 private:
-	char buffer[BUFFER_SIZE];
+	char *buffer;
+	int bufferSize;
 	int bufferBeginningIndex;
-	int nextCommandBeginningIndex;
+	int nextCharIndex;
+	int lastTerminatorIndex;
 	bool isEmpty;
 	bool isFull;
 	void UpdateBufferIncrease();

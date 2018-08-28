@@ -2,11 +2,12 @@
 #include "CircularBuffer.h"
 
 
-CircularBuffer::CircularBuffer()
+CircularBuffer::CircularBuffer(int bufferSize)
 {
-	char buffer[BUFFER_SIZE]{}; //C++ 11
+	this->bufferSize = bufferSize;
+	buffer = new char[bufferSize]{}; //C++ 11
 	bufferBeginningIndex = 0;
-	nextCommandBeginningIndex = 0;
+	nextCharIndex = 0;
 	isEmpty = true;
 	isFull = false;
 }
@@ -14,15 +15,21 @@ CircularBuffer::CircularBuffer()
 
 CircularBuffer::~CircularBuffer()
 {
+	delete buffer;
+	buffer = nullptr;
 }
 
 
 eCurcularBufferErrorCode CircularBuffer::AddCharacter(char a)
 {
 	if (true == isFull) {
+		if (TERMINATOR == a) {
+			nextCharIndex = lastTerminatorIndex + 1; //do poprawy!!!
+			isFull = false;
+		}
 		return BUFFER_FULL;
 	}
-	buffer[nextCommandBeginningIndex] = a;
+	buffer[nextCharIndex] = a;
 	if (TERMINATOR == a) {
 		isEmpty = false;
 	}
@@ -47,7 +54,7 @@ eCurcularBufferErrorCode CircularBuffer::GetCommand(char *command)
 
 		*(command++) = buffer[bufferBeginningIndex++];
 	}
-	*(command++) == '\0';
+	*(command++) = '\0';
 	UpdateBufferDecrease();
 	return SUCCESS;
 }
@@ -55,11 +62,11 @@ eCurcularBufferErrorCode CircularBuffer::GetCommand(char *command)
 
 void CircularBuffer::UpdateBufferIncrease()
 {
-	nextCommandBeginningIndex++;
-	if (BUFFER_SIZE == nextCommandBeginningIndex) {
-		nextCommandBeginningIndex = 0;
+	nextCharIndex++;
+	if (bufferSize == nextCharIndex) {
+		nextCharIndex = 0;
 	}
-	if (bufferBeginningIndex == nextCommandBeginningIndex) {
+	if (bufferBeginningIndex == nextCharIndex) {
 		isFull = true;
 	}
 
@@ -70,10 +77,10 @@ void CircularBuffer::UpdateBufferDecrease()
 {
 	bufferBeginningIndex++;
 	isFull = false;
-	if (BUFFER_SIZE == bufferBeginningIndex) {
+	if (bufferSize == bufferBeginningIndex) {
 		bufferBeginningIndex = 0;
 	}
-	if (bufferBeginningIndex == nextCommandBeginningIndex) {
+	if (bufferBeginningIndex == nextCharIndex) {
 		isEmpty = true;
 	}
 }
