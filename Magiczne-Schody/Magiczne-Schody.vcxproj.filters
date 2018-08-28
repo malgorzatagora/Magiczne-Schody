@@ -36,6 +36,9 @@
     <ClInclude Include="mbed.h">
       <Filter>Stubs</Filter>
     </ClInclude>
+    <ClInclude Include="PCA9685.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -52,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="UT_PCA9685.cpp">
       <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="PCA9685.cpp">
+      <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
