@@ -23,8 +23,8 @@ public:
 private:
 	char *buffer;
 	int bufferSize;
-	int bufferBeginningIndex;
-	int nextCharIndex;
+	int head;
+	int tail;
 	int lastTerminatorIndex;
 	bool isEmpty;
 	bool isFull;

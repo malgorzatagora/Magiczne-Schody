@@ -1,3 +1,12 @@
+/*******************************************************
+* Copyright (C) 2018 Malgorzata Gora <gora.malgorzata.b@gmail.com>
+*
+* This file is part of  project Magiczne Schody.
+*
+* Project Magiczne Schody can not be copied and/or distributed without the express
+* permission of Malgorzata Gora <gora.malgorzata.b@gmail.com>
+*******************************************************/
+
 #include "stdafx.h"
 #include "CircularBuffer.h"
 
@@ -5,9 +14,9 @@
 CircularBuffer::CircularBuffer(int bufferSize)
 {
 	this->bufferSize = bufferSize;
-	buffer = new char[bufferSize]{}; //C++ 11
-	bufferBeginningIndex = 0;
-	nextCharIndex = 0;
+	buffer = new char[bufferSize];
+	head = 0;
+	tail = 0;
 	isEmpty = true;
 	isFull = false;
 }
@@ -24,12 +33,12 @@ eCurcularBufferErrorCode CircularBuffer::AddCharacter(char a)
 {
 	if (true == isFull) {
 		if (TERMINATOR == a) {
-			nextCharIndex = lastTerminatorIndex + 1; //do poprawy!!!
+			tail = lastTerminatorIndex + 1; //do poprawy!!!
 			isFull = false;
 		}
 		return BUFFER_FULL;
 	}
-	buffer[nextCharIndex] = a;
+	buffer[tail] = a;
 	if (TERMINATOR == a) {
 		isEmpty = false;
 	}
@@ -50,9 +59,9 @@ eCurcularBufferErrorCode CircularBuffer::GetCommand(char *command)
 	if (true == isEmpty) {
 		return BUFFER_EMPTY;
 	}
-	while (TERMINATOR != buffer[bufferBeginningIndex]) {
+	while (TERMINATOR != buffer[head]) {
 
-		*(command++) = buffer[bufferBeginningIndex++];
+		*(command++) = buffer[head++];
 	}
 	*(command++) = '\0';
 	UpdateBufferDecrease();
@@ -62,11 +71,11 @@ eCurcularBufferErrorCode CircularBuffer::GetCommand(char *command)
 
 void CircularBuffer::UpdateBufferIncrease()
 {
-	nextCharIndex++;
-	if (bufferSize == nextCharIndex) {
-		nextCharIndex = 0;
+	tail++;
+	if (bufferSize == tail) {
+		tail = 0;
 	}
-	if (bufferBeginningIndex == nextCharIndex) {
+	if (head == tail) {
 		isFull = true;
 	}
 
@@ -75,12 +84,12 @@ void CircularBuffer::UpdateBufferIncrease()
 
 void CircularBuffer::UpdateBufferDecrease()
 {
-	bufferBeginningIndex++;
+	head++;
 	isFull = false;
-	if (bufferSize == bufferBeginningIndex) {
-		bufferBeginningIndex = 0;
+	if (bufferSize == head) {
+		head = 0;
 	}
-	if (bufferBeginningIndex == nextCharIndex) {
+	if (head == tail) {
 		isEmpty = true;
 	}
 }
