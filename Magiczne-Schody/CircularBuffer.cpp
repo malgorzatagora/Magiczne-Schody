@@ -32,8 +32,8 @@ CircularBuffer::~CircularBuffer()
 eCurcularBufferErrorCode CircularBuffer::AddCharacter(char a)
 {
 	if (true == isFull) {
-		if (TERMINATOR == a) {
-			tail = lastTerminatorIndex + 1; //do poprawy!!!
+		if ((TERMINATOR == a) && (lastTerminatorIndex < (bufferSize-1))) {
+			tail = ++lastTerminatorIndex; 
 			isFull = false;
 		}
 		return BUFFER_FULL;
@@ -63,7 +63,7 @@ eCurcularBufferErrorCode CircularBuffer::GetCommand(char *command)
 
 		*(command++) = buffer[head++];
 	}
-	*(command++) = '\0';
+	*(command++) = TERMINATOR;
 	UpdateBufferDecrease();
 	return SUCCESS;
 }
@@ -78,7 +78,6 @@ void CircularBuffer::UpdateBufferIncrease()
 	if (head == tail) {
 		isFull = true;
 	}
-
 }
 
 
@@ -89,7 +88,7 @@ void CircularBuffer::UpdateBufferDecrease()
 	if (bufferSize == head) {
 		head = 0;
 	}
-	if (head == tail) {
+	if ((head == tail) || (lastTerminatorIndex == (head -1)) || ((head = 0) && (lastTerminatorIndex == (bufferSize -1)))){
 		isEmpty = true;
 	}
 }
