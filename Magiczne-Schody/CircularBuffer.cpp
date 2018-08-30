@@ -42,6 +42,7 @@ eCurcularBufferErrorCode CircularBuffer::AddCharacter(char a)
 	buffer[tail] = a;
 	if (TERMINATOR == a) {
 		isEmpty = false;
+		callback();
 	}
 	UpdateBufferIncrease();
 	return SUCCESS;
