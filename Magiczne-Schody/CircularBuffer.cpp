@@ -11,14 +11,15 @@
 #include "CircularBuffer.h"
 
 
-CircularBuffer::CircularBuffer(int bufferSize)
+CircularBuffer::CircularBuffer(int bufferSize, void (*callback)(void))
 {
 	this->bufferSize = bufferSize;
-	buffer = new char[bufferSize];
-	head = 0;
-	tail = 0;
-	isEmpty = true;
-	isFull = false;
+	this->buffer = new char[bufferSize];
+	this->head = 0;
+	this->tail = 0;
+	this->isEmpty = true;
+	this->isFull = false;
+	this->callback = callback;
 }
 
 

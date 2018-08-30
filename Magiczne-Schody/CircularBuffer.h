@@ -14,7 +14,7 @@ constexpr auto TERMINATOR = '\n';
 class CircularBuffer: public ICircularBuffer
 {
 public:
-	CircularBuffer(int bufferSize);
+	CircularBuffer(int bufferSize, void (*callback)(void));
 	~CircularBuffer();
 	eCurcularBufferErrorCode AddCharacter(char a);
 	bool IsCommandAvailable();
@@ -28,6 +28,7 @@ private:
 	int lastTerminatorIndex;
 	bool isEmpty;
 	bool isFull;
+	void (*callback)(void);
 	void UpdateBufferIncrease();
 	void UpdateBufferDecrease();
 };
