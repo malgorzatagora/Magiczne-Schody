@@ -8,7 +8,7 @@
 *******************************************************/
 #pragma once
 
-enum eCurcularBufferErrorCode
+enum eCircularBufferErrorCode
 {
 	SUCCESS = 0,
 	BUFFER_EMPTY = 5,
@@ -20,7 +20,7 @@ class ICircularBuffer
 {
 public:
 	// pure virtual functions providing interface framework.
-	virtual eCurcularBufferErrorCode AddCharacter(char a) = 0;
+	virtual eCircularBufferErrorCode AddCharacter(char a) = 0;
 	virtual bool IsCommandAvailable() = 0;
-	virtual eCurcularBufferErrorCode GetCommand(char *command) = 0;
+	virtual eCircularBufferErrorCode GetCommand(char *command) = 0;
 };

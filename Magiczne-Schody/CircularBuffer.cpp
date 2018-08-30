@@ -30,7 +30,7 @@ CircularBuffer::~CircularBuffer()
 }
 
 
-eCurcularBufferErrorCode CircularBuffer::AddCharacter(char a)
+eCircularBufferErrorCode CircularBuffer::AddCharacter(char a)
 {
 	if (true == isFull) {
 		if ((TERMINATOR == a) && (lastTerminatorIndex < (bufferSize-1))) {
@@ -53,7 +53,7 @@ bool CircularBuffer::IsCommandAvailable()
 		return !isEmpty;
 }
 
-eCurcularBufferErrorCode CircularBuffer::GetCommand(char *command)
+eCircularBufferErrorCode CircularBuffer::GetCommand(char *command)
 {
 	if (command == nullptr) {
 		return ERROR;
