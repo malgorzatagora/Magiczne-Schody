@@ -152,6 +152,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CircularBuffer.h" />
+    <ClInclude Include="ICircularBuffer.h" />
     <ClInclude Include="I2C.h" />
     <ClInclude Include="ILEDController.h" />
     <ClInclude Include="mbed.h" />
@@ -159,6 +161,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CircularBuffer.cpp" />
     <ClCompile Include="I2C.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -30,6 +30,11 @@
     <ClInclude Include="ILEDController.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="ICircularBuffer.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="CircularBuffer.h">
+      <Filter>Pliki nagłówkowe</Filter>
     <ClInclude Include="I2C.h">
       <Filter>Stubs</Filter>
     </ClInclude>
@@ -49,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="UT_I2C.cpp">
       <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CircularBuffer.cpp">
+      <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
