@@ -113,6 +113,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <OptimizeReferences>false</OptimizeReferences>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,6 +154,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CircularBuffer.h" />
+    <ClInclude Include="Drivers.h" />
+    <ClInclude Include="ICircularBuffer.h" />
     <ClInclude Include="I2C.h" />
     <ClInclude Include="ILEDController.h" />
     <ClInclude Include="mbed.h" />
@@ -160,6 +165,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CircularBuffer.cpp" />
+    <ClCompile Include="Drivers.cpp" />
     <ClCompile Include="I2C.cpp" />
     <ClCompile Include="PCA9685.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -169,6 +176,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="unittest1.cpp" />
+    <ClCompile Include="UT_Drivers.cpp" />
     <ClCompile Include="UT_I2C.cpp" />
     <ClCompile Include="UT_PCA9685.cpp" />
   </ItemGroup>

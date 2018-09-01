@@ -1,34 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Pliki źródłowe">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Pliki zasobów">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Stubs">
-      <UniqueIdentifier>{d9320576-d7d7-443d-92ed-cbbc28065555}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UnitTests">
-      <UniqueIdentifier>{4171bae1-7bed-4747-a5d6-6e3d7617d6be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="CircularBuffer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="I2C.cpp">
+      <Filter>Stubs</Filter>
+    </ClCompile>
+    <ClCompile Include="unittest1.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="UT_I2C.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="Drivers.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UT_Drivers.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="CircularBuffer.h">
+      <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="ICircularBuffer.h">
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="ILEDController.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="I2C.h">
       <Filter>Stubs</Filter>
@@ -37,12 +40,12 @@
       <Filter>Stubs</Filter>
     </ClInclude>
     <ClInclude Include="PCA9685.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="I2C.cpp">
       <Filter>Stubs</Filter>
@@ -57,7 +60,24 @@
       <Filter>UnitTests</Filter>
     </ClCompile>
     <ClCompile Include="PCA9685.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
+    <ClInclude Include="Drivers.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{1d9e15a4-16f7-44ef-99c0-a67959c8da22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{502734bc-6890-403f-a17c-8d971df7e8a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stubs">
+      <UniqueIdentifier>{715714b0-b7c8-4edb-80ce-3df67653b39f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTests">
+      <UniqueIdentifier>{a6ef78fd-5ebd-4dbe-b1ae-1fd694889f13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
