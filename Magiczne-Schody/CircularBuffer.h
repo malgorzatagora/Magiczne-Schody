@@ -19,6 +19,7 @@ public:
 	eCircularBufferErrorCode AddCharacter(char a);
 	bool IsCommandAvailable();
 	eCircularBufferErrorCode GetCommand(char *command);
+	char GetElement(int elementIndex);
 
 private:
 	char *buffer;

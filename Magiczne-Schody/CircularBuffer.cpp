@@ -94,3 +94,8 @@ void CircularBuffer::UpdateBufferDecrease()
 		isEmpty = true;
 	}
 }
+
+char CircularBuffer::GetElement(int elementIndex) 
+{
+	return buffer[elementIndex];
+}
