@@ -39,6 +39,29 @@
     <ClInclude Include="mbed.h">
       <Filter>Stubs</Filter>
     </ClInclude>
+    <ClInclude Include="PCA9685.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="I2C.cpp">
+      <Filter>Stubs</Filter>
+    </ClCompile>
+    <ClCompile Include="unittest1.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="UT_I2C.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="UT_PCA9685.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="PCA9685.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
     <ClInclude Include="Drivers.h">
       <Filter>Headers</Filter>
     </ClInclude>
