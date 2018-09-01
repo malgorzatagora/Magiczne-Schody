@@ -6,7 +6,7 @@
 * Project Magiczne Schody can not be copied and/or distributed without the express
 * permission of Malgorzata Gora <gora.malgorzata.b@gmail.com>
 *
-* Unit tests for I2C stub class
+* Unit tests for  Drivers class
 *******************************************************/
 
 #include "stdafx.h"
