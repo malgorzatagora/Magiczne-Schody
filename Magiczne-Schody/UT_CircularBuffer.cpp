@@ -43,7 +43,7 @@ namespace CircBuffer_TEST
 			testVar = 0;
 			CircularBuffer testBuffer(10, &TestCallback);
 			testBuffer.AddCharacter('A');
-			Assert::AreEqual(static_cast < int>(0), static_cast<int>(testVar));
+			Assert::AreEqual(static_cast <int>(0), static_cast<int>(testVar));
 			testBuffer.AddCharacter(TERMINATOR);
 			Assert::AreEqual(static_cast <int>(1), static_cast<int>(testVar));
 			testBuffer.AddCharacter('B');
@@ -71,19 +71,32 @@ namespace CircBuffer_TEST
 			}
 			Assert::AreEqual(5, i);
 		}
-		/*TEST_METHOD(AddingElementsBuffFull)
-		{
-			
-		}
 
-		TEST_METHOD(GettingCommandWhenAvailable)
-		{
-
-		}
 
 		TEST_METHOD(GettingCommandWhenBufferEmpty)
 		{
+			int i = 0;
+			char command[10] = "";
+			char testArray[4] = { 'a', 'b', 'c', '\n' };
+			CircularBuffer testBuffer(10, &TestCallback);
 
+			Assert::AreEqual(static_cast <int>(BUFFER_EMPTY), static_cast <int>(testBuffer.GetCommand(command)));
+
+			for (int i = 0; i < 3; i++) {
+				testBuffer.AddCharacter(testArray[i]); // '\n' not sent yet
+			}
+			Assert::AreEqual(static_cast <int>(BUFFER_EMPTY), static_cast <int>(testBuffer.GetCommand(command)));
+			testBuffer.AddCharacter('\n');
+			Assert::AreEqual(static_cast <int>(SUCCESS), static_cast <int>(testBuffer.GetCommand(command)));
+			i = 0;
+			while (command[i]) {
+				Assert::AreEqual(testArray[i], command[i]);
+				i++;
+			}
+		}
+		/*TEST_METHOD(AddingElementsBuffFull)
+		{
+			
 		}*/
 	};
 }
