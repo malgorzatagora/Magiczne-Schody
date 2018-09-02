@@ -42,15 +42,24 @@ namespace CircBuffer_TEST
 		{
 			Assert::AreEqual(1,1);
 		}
+		
+		TEST_METHOD(CallbackFunction)
+		{
+			testVar = 0;
+			CircularBuffer testBuffer(10, &TestCallback);
+			testBuffer.AddCharacter('A');
+			Assert::AreEqual(static_cast < int>(0), static_cast<int>(testVar));
+			testBuffer.AddCharacter('\n');
+			Assert::AreEqual(static_cast <int>(1), static_cast<int>(testVar));
+			testBuffer.AddCharacter('B');
+			Assert::AreEqual(static_cast <int>(1), static_cast<int>(testVar));
+			testBuffer.AddCharacter('\n');
+			Assert::AreEqual(static_cast <int>(0), static_cast<int>(testVar));
+		}
 
 		/*TEST_METHOD(AddingElementsBuffFull)
 		{
 			
-		}
-
-		TEST_METHOD(CallbackFunction)
-		{
-
 		}
 
 		TEST_METHOD(GettingCommandWhenAvailable)
