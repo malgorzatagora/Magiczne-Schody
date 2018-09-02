@@ -55,17 +55,17 @@ bool CircularBuffer::IsCommandAvailable()
 
 eCircularBufferErrorCode CircularBuffer::GetCommand(char *command)
 {
-	if (command == nullptr) {
-		return ERROR;
-	}
 	if (true == isEmpty) {
 		return BUFFER_EMPTY;
 	}
 	while (TERMINATOR != buffer[head]) {
 
 		*(command++) = buffer[head++];
+		if (bufferSize == head) {
+			head = 0;
+		}
 	}
-	*(command++) = TERMINATOR;
+	*(command++) = TERMINATOR; 
 	UpdateBufferDecrease();
 	return SUCCESS;
 }
