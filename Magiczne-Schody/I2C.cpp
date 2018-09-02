@@ -6,7 +6,8 @@
 * Project Magiczne Schody can not be copied and/or distributed without the express
 * permission of Malgorzata Gora <gora.malgorzata.b@gmail.com>
 *
-* I2C stub class
+* I2C stub class 
+* Implements constructor and write method from mbed I2C class
 *******************************************************/
 
 #include "stdafx.h"
@@ -34,7 +35,7 @@ I2C::~I2C()
 int I2C::write(int address, const char * data, int length, bool repeated)
 {
 	this->address = address;
-	if (length > 5) length = 5;
+	if (length > maxDataLength) length = maxDataLength;
 	for (int i = 0; i < length; i++)
 	{
 		this->data[i] = data[i];
