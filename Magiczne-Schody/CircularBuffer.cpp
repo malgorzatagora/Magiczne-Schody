@@ -49,10 +49,12 @@ eCircularBufferErrorCode CircularBuffer::AddCharacter(char a)
 	return SUCCESS;
 }
 
+
 bool CircularBuffer::IsCommandAvailable()
 {
 		return !isEmpty;
 }
+
 
 eCircularBufferErrorCode CircularBuffer::GetCommand(char *command)
 {
@@ -68,7 +70,6 @@ eCircularBufferErrorCode CircularBuffer::GetCommand(char *command)
 		}
 	}
 	*(command) = TERMINATOR;
-	head = 5;
 	UpdateBufferDecrease();
 	return SUCCESS;
 }
@@ -91,22 +92,25 @@ void CircularBuffer::UpdateBufferDecrease()
 	head++;
 	isFull = false;
 	if (head >= bufferSize) {
-		head = 5;
+		head = 0;
 	}
 	if ((head == tail) || (lastTerminatorIndex == (head-1)) || ((head = 0) && (lastTerminatorIndex == (bufferSize -1)))){
 		isEmpty = true;
 	}
 }
 
+
 char CircularBuffer::GetElement(int elementIndex) 
 {
 	return buffer[elementIndex];
 }
 
+
 int CircularBuffer::HeadPosition(void)
 {
 	return head;
 }
+
 
 int CircularBuffer::BuffSize(void)
 {
