@@ -11,6 +11,7 @@
 #include "CircularBuffer.h"
 
 
+
 CircularBuffer::CircularBuffer(int bufferSize, void (*callback)(void))
 {
 	this->bufferSize = bufferSize;
@@ -48,24 +49,27 @@ eCircularBufferErrorCode CircularBuffer::AddCharacter(char a)
 	return SUCCESS;
 }
 
+
 bool CircularBuffer::IsCommandAvailable()
 {
 		return !isEmpty;
 }
 
+
 eCircularBufferErrorCode CircularBuffer::GetCommand(char *command)
 {
-	if (command == nullptr) {
-		return ERROR;
-	}
 	if (true == isEmpty) {
 		return BUFFER_EMPTY;
 	}
 	while (TERMINATOR != buffer[head]) {
 
 		*(command++) = buffer[head++];
+	
+		if (head >= bufferSize) {
+			head = 0;
+		}
 	}
-	*(command++) = TERMINATOR;
+	*(command) = TERMINATOR;
 	UpdateBufferDecrease();
 	return SUCCESS;
 }
@@ -74,10 +78,10 @@ eCircularBufferErrorCode CircularBuffer::GetCommand(char *command)
 void CircularBuffer::UpdateBufferIncrease()
 {
 	tail++;
-	if (bufferSize == tail) {
+	if (tail >= bufferSize) {
 		tail = 0;
 	}
-	if (head == tail) {
+	if (tail == head) {
 		isFull = true;
 	}
 }
@@ -87,10 +91,28 @@ void CircularBuffer::UpdateBufferDecrease()
 {
 	head++;
 	isFull = false;
-	if (bufferSize == head) {
+	if (head >= bufferSize) {
 		head = 0;
 	}
-	if ((head == tail) || (lastTerminatorIndex == (head -1)) || ((head = 0) && (lastTerminatorIndex == (bufferSize -1)))){
+	if ((head == tail) || (lastTerminatorIndex == (head-1)) || ((head = 0) && (lastTerminatorIndex == (bufferSize -1)))){
 		isEmpty = true;
 	}
+}
+
+
+char CircularBuffer::GetElement(int elementIndex) 
+{
+	return buffer[elementIndex];
+}
+
+
+int CircularBuffer::HeadPosition(void)
+{
+	return head;
+}
+
+
+int CircularBuffer::BuffSize(void)
+{
+	return bufferSize;
 }

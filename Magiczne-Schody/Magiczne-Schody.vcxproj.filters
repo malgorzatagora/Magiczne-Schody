@@ -20,6 +20,9 @@
     <ClCompile Include="UT_Drivers.cpp">
       <Filter>UnitTests</Filter>
     </ClCompile>
+    <ClCompile Include="UT_CircularBuffer.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
