@@ -97,27 +97,19 @@ namespace CircBuffer_TEST
 		{
 			int i = 0;
 			char command[10] = "";
-			char testArray_1[7] = { 'a', 'b', 'c', 'd', 'e', 'f', '\n' };
-			char testArray_2[7] = { 'g', 'h', 'i', 'j', 'k', 'l', '\n' };
+			char testArray_1[5] = { 'a', 'b', 'c', 'd', '\n' };
+			char testArray_2[9] = { 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', '\n' };
 			CircularBuffer testBuffer(10, &TestCallback);
-			for (i = 0; i < 7; i++) {
+			for (i = 0; i < 5; i++) {
 				testBuffer.AddCharacter(testArray_1[i]);
 			}
-			for (i = 0; i < 2; i++) {
-				Assert::AreEqual(static_cast <int>(SUCCESS), static_cast <int>(testBuffer.AddCharacter(testArray_2[0])));
-			}
 			Assert::AreEqual(static_cast <int>(SUCCESS), static_cast <int>(testBuffer.GetCommand(command)));
-
-			Assert::AreEqual(static_cast <int>(SUCCESS), static_cast <int>(testBuffer.AddCharacter(testArray_2[2])));
-
-			Assert::AreEqual(static_cast <int>(SUCCESS), static_cast <int>(testBuffer.AddCharacter(testArray_2[3])));
-
-			for (i = 4; i < 7; i++) {
+			Assert::AreEqual(10, testBuffer.BuffSize());
+			Assert::AreEqual(5, testBuffer.HeadPosition());
+			for (i = 0; i < 9; i++) {
 				Assert::AreEqual(static_cast <int>(SUCCESS), static_cast <int>(testBuffer.AddCharacter(testArray_2[i])));
-				if (1 == i) {
-					testBuffer.GetCommand(command);
-				}
 			}
+
 			Assert::AreEqual('i', testBuffer.GetElement(9));
 			Assert::AreEqual('j', testBuffer.GetElement(0));
 			Assert::AreEqual('\n', testBuffer.GetElement(3));
