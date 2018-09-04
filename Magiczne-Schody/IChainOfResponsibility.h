@@ -6,25 +6,13 @@
 * Project Magiczne Schody can not be copied and/or distributed without the express
 * permission of Malgorzata Gora <gora.malgorzata.b@gmail.com>
 *******************************************************/
-
 #pragma once
-#include "IChainOfResponsibility.h"
 
-class ChainOfResponsibility
+class IChainOfResponsibility
 {
 public:
-	ChainOfResponsibility() : mNextLink(0) { }
-
-public:
-	void addNextLink(ChainOfResponsibility *l);
-
-		virtual ~ChainOfResponsibility();
-
-		void setNextLink(ChainOfResponsibility *l);
-
-protected:
-	virtual void executeCommand(char eCommand);
-
-private:
-	ChainOfResponsibility *mNextLink;
+	// pure virtual functions providing interface framework.
+	virtual void executeCommand(char eCommand) = 0;
+	virtual void addNextLink(ChainOfResponsibility *l) = 0;
+	virtual void setNextLink(ChainOfResponsibility *l) = 0;
 };

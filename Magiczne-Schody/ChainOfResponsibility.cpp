@@ -7,7 +7,34 @@
 * permission of Malgorzata Gora <gora.malgorzata.b@gmail.com>
 *******************************************************/
 
+#include "ChainOfResponsibility.h"
+
+class ChainOfResponsibility
+{
+public:
+	void addNextLink(ChainOfResponsibility *l) {
+		if (mNextLink)
+			mNextLink->addNextLink(l);
+		else
+			mNextLink = l;
+	}
+
+	virtual ~ChainOfResponsibility() { }
+
+	void setNextLink(ChainOfResponsibility *l) {
+		mNextLink = l;
+	}
+
+protected:
+	virtual void executeCommand(char eCommand)
+	{
+		mNextLink->executeCommand(eCommand);
+	}
+	
+private:
+	ChainOfResponsibility *mNextLink;
+};
 
 
 
-// Chain of responsibility placeholder.
+
