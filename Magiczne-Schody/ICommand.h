@@ -8,11 +8,9 @@
 *******************************************************/
 #pragma once
 
-class IChainOfResponsibility
+class ICommand
 {
 public:
 	// pure virtual functions providing interface framework.
-	virtual void executeCommand(char eCommand) = 0;
-	virtual void addNextLink(ChainOfResponsibility *l) = 0;
-	virtual void setNextLink(ChainOfResponsibility *l) = 0;
+	virtual void processRequest(char exeCommand) = 0;
 };

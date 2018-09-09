@@ -8,23 +8,24 @@
 *******************************************************/
 
 #pragma once
-#include "IChainOfResponsibility.h"
+#include "ICommand.h"
 
-class ChainOfResponsibility
+class Command : public ICommand
 {
 public:
-	ChainOfResponsibility() : mNextLink(0) { }
+	Command() : nextSuccessor(0) { }
 
 public:
-	void addNextLink(ChainOfResponsibility *l);
+	void addSuccessor(Command *successor);
 
-		virtual ~ChainOfResponsibility();
+	virtual ~Command();
 
-		void setNextLink(ChainOfResponsibility *l);
+	void setSuccessor(Command *successor);
 
 protected:
-	virtual void executeCommand(char eCommand);
+	virtual void processRequest(char exeCommand);
 
 private:
-	ChainOfResponsibility *mNextLink;
+	Command *nextSuccessor;
 };
+#pragma once

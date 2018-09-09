@@ -24,10 +24,10 @@
     <ClInclude Include="ILEDController.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="IChainOfResponsibility.h">
+    <ClInclude Include="ICommand.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="ChainOfResponsibility.h">
+    <ClInclude Include="Command.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClCompile Include="unittest1.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="ChainOfResponsibility.cpp">
+    <ClCompile Include="Command.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
