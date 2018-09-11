@@ -21,7 +21,7 @@ public:
 	eCircularBufferErrorCode GetCommand(char *command);
 	char GetElement(int elementIndex);
 	int HeadPosition();
-	int CircularBuffer::BuffSize(void);
+	int BuffSize(void);
 
 private:
 	char *buffer;

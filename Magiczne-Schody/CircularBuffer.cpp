@@ -94,7 +94,7 @@ void CircularBuffer::UpdateBufferDecrease()
 	if (head >= bufferSize) {
 		head = 0;
 	}
-	if ((head == tail) || (lastTerminatorIndex == (head-1)) || ((head = 0) && (lastTerminatorIndex == (bufferSize -1)))){
+	if ((head == tail) || (lastTerminatorIndex == (head-1)) || ((0 == head) && (lastTerminatorIndex == (bufferSize -1)))){
 		isEmpty = true;
 	}
 }
