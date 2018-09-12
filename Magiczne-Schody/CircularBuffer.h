@@ -16,9 +16,9 @@ class CircularBuffer: public ICircularBuffer
 public:
 	CircularBuffer(int bufferSize, void (*callback)(void));
 	~CircularBuffer();
-	eCircularBufferErrorCode AddCharacter(char a);
-	bool IsCommandAvailable();
-	eCircularBufferErrorCode GetCommand(char *command);
+	virtual eCircularBufferErrorCode AddCharacter(char a);
+	virtual bool IsCommandAvailable();
+	virtual eCircularBufferErrorCode GetCommand(char *command);
 	char GetElement(int elementIndex);
 	int HeadPosition();
 	int BuffSize(void);

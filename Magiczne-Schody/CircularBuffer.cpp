@@ -27,7 +27,7 @@ CircularBuffer::CircularBuffer(int bufferSize, void (*callback)(void))
 CircularBuffer::~CircularBuffer()
 {
 	delete buffer;
-	buffer = nullptr;
+	buffer = NULL;
 }
 
 
