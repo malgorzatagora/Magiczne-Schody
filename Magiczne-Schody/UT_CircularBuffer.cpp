@@ -292,7 +292,35 @@ namespace CircBuffer_TEST
 		}
 
 
+		TEST_METHOD(CleanInvalidCommand_test3)
+		{
+			int i = 0;
+			char receivedCommand[10] = "";
+			CircularBuffer testBuffer(10, &TestCallback);
 
+			//command #1
+			testBuffer.AddCharacter('1');
+			testBuffer.AddCharacter('2');
+			testBuffer.AddCharacter('3');
+			testBuffer.AddCharacter('4');
+			testBuffer.AddCharacter('5');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); // 6
+		    //command #2
+			testBuffer.AddCharacter('a'); //7
+			testBuffer.AddCharacter('b'); //8
+			testBuffer.AddCharacter('c'); //9
+			testBuffer.AddCharacter('d'); //10
+			testBuffer.AddCharacter('e'); //11 !!!
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); //12 !!!
+            //Retry with shorter command #3
+			testBuffer.AddCharacter('x'); //7
+			testBuffer.AddCharacter('y'); //8
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); //9
+
+			testBuffer.GetCommand(receivedCommand); //expected command #1			
+			testBuffer.GetCommand(receivedCommand); //expected command #3 
+			Assert::AreEqual('x', receivedCommand[0]);
+		}
 
 
 
