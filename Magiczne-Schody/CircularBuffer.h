@@ -15,7 +15,7 @@ class CircularBuffer: public ICircularBuffer
 {
 public:
 	CircularBuffer(int bufferSize, void (*callback)(void));
-	~CircularBuffer();
+	virtual ~CircularBuffer();
 	virtual eCircularBufferErrorCode AddCharacter(char a);
 	virtual bool IsCommandAvailable();
 	virtual eCircularBufferErrorCode GetCommand(char *command);

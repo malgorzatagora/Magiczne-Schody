@@ -43,6 +43,7 @@ eCircularBufferErrorCode CircularBuffer::AddCharacter(char a)
 	buffer[tail] = a;
 	if (TERMINATOR == a) {
 		isEmpty = false;
+		lastTerminatorIndex = tail;
 		callback();
 	}
 	UpdateBufferIncrease();
@@ -59,6 +60,7 @@ bool CircularBuffer::IsCommandAvailable()
 eCircularBufferErrorCode CircularBuffer::GetCommand(char *command)
 {
 	if (true == isEmpty) {
+		*(command) = '\0';
 		return BUFFER_EMPTY;
 	}
 	while (TERMINATOR != buffer[head]) {
@@ -69,7 +71,7 @@ eCircularBufferErrorCode CircularBuffer::GetCommand(char *command)
 			head = 0;
 		}
 	}
-	*(command) = TERMINATOR;
+	*(command) = '\0';
 	UpdateBufferDecrease();
 	return SUCCESS;
 }
