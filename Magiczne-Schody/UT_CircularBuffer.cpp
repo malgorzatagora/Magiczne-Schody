@@ -239,7 +239,7 @@ namespace CircBuffer_TEST
 		}
 
 
-		TEST_METHOD(CleanInvalidCommand_test1)
+		TEST_METHOD(ClearInvalidCommand_test1)
 		{
 			int i = 0;
 			char receivedCommand[10] = "";
@@ -265,7 +265,7 @@ namespace CircBuffer_TEST
 		}
 
 
-		TEST_METHOD(CleanInvalidCommand_test2)
+		TEST_METHOD(ClearInvalidCommand_test2)
 		{
 			int i = 0;
 			char receivedCommand[10] = "";
@@ -292,7 +292,7 @@ namespace CircBuffer_TEST
 		}
 
 
-		TEST_METHOD(CleanInvalidCommand_test3)
+		TEST_METHOD(ClearInvalidCommand_test3)
 		{
 			int i = 0;
 			char receivedCommand[10] = "";
