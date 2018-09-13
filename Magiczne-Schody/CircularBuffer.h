@@ -9,7 +9,7 @@
 
 #pragma once
 #include "ICircularBuffer.h"
-constexpr auto TERMINATOR = '\n';
+
 
 class CircularBuffer: public ICircularBuffer
 {
@@ -22,6 +22,7 @@ public:
 	char GetElement(int elementIndex);
 	int HeadPosition();
 	int BuffSize(void);
+	static const char TERMINATOR = '\n';
 
 private:
 	char *buffer;

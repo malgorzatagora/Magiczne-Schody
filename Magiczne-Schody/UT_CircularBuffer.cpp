@@ -33,7 +33,7 @@ namespace CircBuffer_TEST
 				Assert::AreEqual(static_cast<int>(SUCCESS), static_cast<int>(testBuffer.AddCharacter(testArray[i])));
 			}
 			Assert::AreEqual('a', testBuffer.GetElement(0));
-			Assert::AreEqual(TERMINATOR, testBuffer.GetElement(4));
+			Assert::AreEqual(CircularBuffer::TERMINATOR, testBuffer.GetElement(4));
 			Assert::AreEqual('i', testBuffer.GetElement(9));
 			Assert::AreEqual(static_cast<int>(BUFFER_FULL), static_cast<int>(testBuffer.AddCharacter('X')));
 		}
@@ -44,11 +44,11 @@ namespace CircBuffer_TEST
 			CircularBuffer testBuffer(10, &TestCallback);
 			testBuffer.AddCharacter('A');
 			Assert::AreEqual(static_cast <int>(0), static_cast<int>(testVar));
-			testBuffer.AddCharacter(TERMINATOR);
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
 			Assert::AreEqual(static_cast <int>(1), static_cast<int>(testVar));
 			testBuffer.AddCharacter('B');
 			Assert::AreEqual(static_cast <int>(1), static_cast<int>(testVar));
-			testBuffer.AddCharacter(TERMINATOR);
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
 			Assert::AreEqual(static_cast <int>(0), static_cast<int>(testVar));
 		}
 
@@ -114,5 +114,222 @@ namespace CircBuffer_TEST
 			Assert::AreEqual('j', testBuffer.GetElement(0));
 			Assert::AreEqual('\n', testBuffer.GetElement(3));
 		}
+
+		TEST_METHOD(Add3CommandsAndThenGetOneByOne_test1)
+		{
+			int i = 0;
+			char receivedCommand[10] = "";
+			CircularBuffer testBuffer(10, &TestCallback);
+
+			//command #1
+			testBuffer.AddCharacter('a');
+			testBuffer.AddCharacter('b');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #2
+			testBuffer.AddCharacter('c');
+			testBuffer.AddCharacter('d');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #3
+			testBuffer.AddCharacter('e');
+			testBuffer.AddCharacter('f');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+
+			testBuffer.GetCommand(receivedCommand); // expected command #1	
+			Assert::AreEqual('a', receivedCommand[0]);
+		}
+
+		TEST_METHOD(Add3CommandsAndThenGetOneByOne_test2)
+		{
+			int i = 0;
+			char receivedCommand[10] = "";
+			CircularBuffer testBuffer(10, &TestCallback);
+
+			//command #1
+			testBuffer.AddCharacter('a');
+			testBuffer.AddCharacter('b');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #2
+			testBuffer.AddCharacter('c');
+			testBuffer.AddCharacter('d');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #3
+			testBuffer.AddCharacter('e');
+			testBuffer.AddCharacter('f');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+
+			testBuffer.GetCommand(receivedCommand); // expected command #1
+			Assert::AreEqual('b', receivedCommand[1]);
+		}
+
+
+		TEST_METHOD(Add3CommandsAndThenGetOneByOne_test3)
+		{
+			int i = 0;
+			char receivedCommand[10] = "";
+			CircularBuffer testBuffer(10, &TestCallback);
+
+			//command #1
+			testBuffer.AddCharacter('a');
+			testBuffer.AddCharacter('b');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #2
+			testBuffer.AddCharacter('c');
+			testBuffer.AddCharacter('d');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #3
+			testBuffer.AddCharacter('e');
+			testBuffer.AddCharacter('f');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+
+			testBuffer.GetCommand(receivedCommand); // expected command #1
+			//A valid C string requires the presence of a terminating "null character"
+			Assert::AreEqual('\0', receivedCommand[2]); 		
+		}
+
+
+		TEST_METHOD(Add3CommandsAndThenGetOneByOne_test4)
+		{
+			int i = 0;
+			char receivedCommand[10] = "";
+			CircularBuffer testBuffer(10, &TestCallback);
+
+			//command #1
+			testBuffer.AddCharacter('a');
+			testBuffer.AddCharacter('b');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #2
+			testBuffer.AddCharacter('c');
+			testBuffer.AddCharacter('d');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #3
+			testBuffer.AddCharacter('e');
+			testBuffer.AddCharacter('f');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+
+			testBuffer.GetCommand(receivedCommand); 	
+			testBuffer.GetCommand(receivedCommand); // expected command #2
+			Assert::AreEqual('c', receivedCommand[0]);
+		}
+
+
+		TEST_METHOD(Add3CommandsAndThenGetOneByOne_test5)
+		{
+			int i = 0;
+			char receivedCommand[10] = "";
+			CircularBuffer testBuffer(10, &TestCallback);
+
+			//command #1
+			testBuffer.AddCharacter('a');
+			testBuffer.AddCharacter('b');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #2
+			testBuffer.AddCharacter('c');
+			testBuffer.AddCharacter('d');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+			//command #3
+			testBuffer.AddCharacter('e');
+			testBuffer.AddCharacter('f');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR);
+
+			testBuffer.GetCommand(receivedCommand);	
+			testBuffer.GetCommand(receivedCommand); 
+			testBuffer.GetCommand(receivedCommand); // expected command #3
+			Assert::AreEqual('e', receivedCommand[0]);
+			Assert::AreEqual('f', receivedCommand[1]);
+		}
+
+
+		TEST_METHOD(ClearInvalidCommand_test1)
+		{
+			int i = 0;
+			char receivedCommand[10] = "";
+			CircularBuffer testBuffer(10, &TestCallback);
+
+			//command #1
+			testBuffer.AddCharacter('1');
+			testBuffer.AddCharacter('2');
+			testBuffer.AddCharacter('3');
+			testBuffer.AddCharacter('4');
+			testBuffer.AddCharacter('5');
+			testBuffer.AddCharacter('6');
+			testBuffer.AddCharacter('7');
+			testBuffer.AddCharacter('8');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); // 9
+			//command #2
+			testBuffer.AddCharacter('a'); //10
+			testBuffer.AddCharacter('b'); //11 !!!
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); //12 !!!
+			
+			testBuffer.GetCommand(receivedCommand); //expected command #1
+			Assert::AreEqual('1', receivedCommand[0]);
+		}
+
+
+		TEST_METHOD(ClearInvalidCommand_test2)
+		{
+			int i = 0;
+			char receivedCommand[10] = "";
+			CircularBuffer testBuffer(10, &TestCallback);
+
+			//command #1
+			testBuffer.AddCharacter('1');
+			testBuffer.AddCharacter('2');
+			testBuffer.AddCharacter('3');
+			testBuffer.AddCharacter('4');
+			testBuffer.AddCharacter('5');
+			testBuffer.AddCharacter('6');
+			testBuffer.AddCharacter('7');
+			testBuffer.AddCharacter('8');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); // 9
+			//command #2
+			testBuffer.AddCharacter('a'); //10
+			testBuffer.AddCharacter('b'); //11 !!!
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); //12 !!!
+
+			testBuffer.GetCommand(receivedCommand); //expected command #1
+			testBuffer.GetCommand(receivedCommand); //expected empty string 
+			Assert::AreEqual('\0', receivedCommand[0]);
+		}
+
+
+		TEST_METHOD(ClearInvalidCommand_test3)
+		{
+			int i = 0;
+			char receivedCommand[10] = "";
+			CircularBuffer testBuffer(10, &TestCallback);
+
+			//command #1
+			testBuffer.AddCharacter('1');
+			testBuffer.AddCharacter('2');
+			testBuffer.AddCharacter('3');
+			testBuffer.AddCharacter('4');
+			testBuffer.AddCharacter('5');
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); // 6
+		    //command #2
+			testBuffer.AddCharacter('a'); //7
+			testBuffer.AddCharacter('b'); //8
+			testBuffer.AddCharacter('c'); //9
+			testBuffer.AddCharacter('d'); //10
+			testBuffer.AddCharacter('e'); //11 !!!
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); //12 !!!
+            //Retry with shorter command #3
+			testBuffer.AddCharacter('x'); //7
+			testBuffer.AddCharacter('y'); //8
+			testBuffer.AddCharacter(CircularBuffer::TERMINATOR); //9
+
+			testBuffer.GetCommand(receivedCommand); //expected command #1			
+			testBuffer.GetCommand(receivedCommand); //expected command #3 
+			Assert::AreEqual('x', receivedCommand[0]);
+		}
+
+
+
+
+
+
+
 	};
+
+
+
 }
