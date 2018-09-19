@@ -43,7 +43,7 @@ int I2C::write(int address, const char * data, int length, bool repeated)
 	{
 		this->data[i] = data[i];
 		//zapis do pliku txt
-		saveDataToFile << this->address << "|" << this->data[i] << "|" << endl;
+		saveDataToFile << this->address << "|" << int(this->data[i]) << "|" << endl;
 		if (!saveDataToFile) this->writeResult = -1;
 
 		if (this->addressAutoIncrement == 1) {
