@@ -32,7 +32,7 @@ namespace Stubs
 		{
 			I2C pca(PB_9, PB_8);
 			char data[2] = {0x00, 0xFF};
-			
+			pca.testSetAddressAutoIncrement(false);
 			pca.write(0x64, data, 2);
 			Assert::AreEqual(0x64, pca.testGetAddress());
 		}
@@ -47,7 +47,7 @@ namespace Stubs
 			Assert::AreEqual(0x11, pca.testGetData(0));
 			Assert::AreEqual(0x12, pca.testGetData(1));
 			Assert::AreEqual(0, pca.testGetData(3));
-			Assert::AreEqual(-1, pca.testGetData(7));
+			Assert::AreEqual(-1, pca.testGetData(17));
 		}
 		
 	};
