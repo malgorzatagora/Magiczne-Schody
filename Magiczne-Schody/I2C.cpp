@@ -14,7 +14,6 @@
 #include<iostream>
 #include<fstream>
 #include "I2C.h"
-using namespace std;
 
 I2C::I2C(PinName sda, PinName scl)
 {
@@ -36,14 +35,14 @@ I2C::~I2C()
 
 int I2C::write(int address, const char * data, int length, bool repeated)
 {
-	ofstream saveDataToFile("D:\\I2CResultsFile.txt", ios::out);
+	std::ofstream saveDataToFile("D:\\I2CResultsFile.txt", std::ios::out);
 	this->address = address;
 	if (length > maxDataLength) length = maxDataLength;
 	for (int i = 0; i < length; i++)
 	{
 		this->data[i] = data[i];
 		//zapis do pliku txt
-		saveDataToFile << this->address << "|" << int(this->data[i]) << "|" << endl;
+		saveDataToFile << this->address << "|" << int(this->data[i]) << "|" << std::endl;
 		if (!saveDataToFile) this->writeResult = -1;
 
 		if (this->addressAutoIncrement == 1) {
