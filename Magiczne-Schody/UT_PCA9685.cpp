@@ -12,6 +12,8 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "mbed.h"
+#include "PCA9685.h"
+#include <fstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -44,6 +46,29 @@ namespace Stubs
 			
 		}
 
+		TEST_METHOD(InitModes)
+		{
+			I2C i2c_pca(PB_9, PB_8);
+			PCA9685 myPCA(&i2c_pca, 0x64);
+			int addressFromFile;
+			int registerAddressFromFile;
+			char delimiter;
+			int registerDataFromFile;
+			myPCA.Init();
+
+			std::ifstream readDataFromFile("I2CResultsFile.txt");
+			if (!readDataFromFile) Assert::AreEqual("success", "failed");
+
+			readDataFromFile >> addressFromFile;
+			readDataFromFile >> registerAddressFromFile;
+			readDataFromFile >> delimiter;
+			readDataFromFile >> registerDataFromFile;
+			Assert::AreEqual(0x64, addressFromFile);
+			Assert::AreEqual(MODE2_ADDRESS, registerAddressFromFile);
+			Assert::AreEqual(0x18, registerDataFromFile);
+
+			readDataFromFile.close();
+		}
 
 
 

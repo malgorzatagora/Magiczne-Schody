@@ -36,8 +36,4 @@ private:
 	void SetMode1(char newMode);
 	void SetMode2(char newMode);
 	void SetPWMFreq(int frequency);
-	void Reset(void);
-	void WriteRegister(int registerNumber, int value);
-	int ReadRegister(int registerNumber);
 };
-

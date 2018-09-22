@@ -45,7 +45,7 @@ int I2C::write(int address, const char * data, int length, bool repeated)
 	//zapis do pliku txt
 	std::ofstream saveDataToFile("I2CResultsFile.txt", std::ios::out);
 	saveDataToFile << this->address << std::endl;
-	for (char i = 0; i < length; i++){
+	for (char i = 0; i < length-1; i++){
 		if (this->addressAutoIncrement == 1) {
 			saveDataToFile << int(this->data[0] + i) << "|" << int(this->data[i + 1]) << "|" << std::endl;
 		}

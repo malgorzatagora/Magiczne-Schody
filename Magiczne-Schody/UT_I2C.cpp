@@ -103,7 +103,7 @@ namespace Stubs
 			Assert::AreEqual(0x11, pca.testGetData(0));
 			Assert::AreEqual(0x12, pca.testGetData(1));
 			Assert::AreEqual(0, pca.testGetData(3));
-			Assert::AreEqual(-1, pca.testGetData(17));
+			Assert::AreEqual(-1, pca.testGetData(66));
 		}
 
 
