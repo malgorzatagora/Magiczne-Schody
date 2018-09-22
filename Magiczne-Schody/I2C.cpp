@@ -35,20 +35,26 @@ I2C::~I2C()
 
 int I2C::write(int address, const char * data, int length, bool repeated)
 {
-	std::ofstream saveDataToFile("I2CResultsFile.txt", std::ios::out);
 	this->address = address;
 	if (length > maxDataLength) length = maxDataLength;
 	for (int i = 0; i < length; i++)
 	{
 		this->data[i] = data[i];
-		//zapis do pliku txt
-		saveDataToFile << this->address << "|" << int(this->data[i]) << "|" << std::endl;
-		if (!saveDataToFile) this->writeResult = -1;
+	}
 
+	//zapis do pliku txt
+	std::ofstream saveDataToFile("I2CResultsFile.txt", std::ios::out);
+	saveDataToFile << this->address << std::endl;
+	for (char i = 0; i < length; i++){
 		if (this->addressAutoIncrement == 1) {
-			this->address++;
+			saveDataToFile << int(this->data[0] + i) << "|" << int(this->data[i + 1]) << "|" << std::endl;
+		}
+		else {
+			saveDataToFile << int(this->data[i]) << "|" << int(this->data[i + 1]) << "|" << std::endl;
+			i++;
 		}
 	}
+	if (!saveDataToFile) this->writeResult = -1;
 	saveDataToFile.close();
 	return this->writeResult;
 }

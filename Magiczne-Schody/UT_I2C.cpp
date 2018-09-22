@@ -39,39 +39,58 @@ namespace Stubs
 			Assert::AreEqual(0x64, pca.testGetAddress());
 		}
 
-		TEST_METHOD(AddressFromFile_AutoIncrementOn)
+
+		TEST_METHOD(AddressFromFile)
+		{
+			I2C pca(PB_9, PB_8);
+			char data[2] = { 0x00, 0xFF };
+			int addressFromFile;
+
+			std::ifstream readDataFromFile("I2CResultsFile.txt");
+			if (!readDataFromFile) Assert::AreEqual("success", "failed");
+
+			pca.testSetAddressAutoIncrement(false);
+			pca.write(0x64, data, 2);
+			readDataFromFile >> addressFromFile;
+			Assert::AreEqual(0x64, addressFromFile);
+			readDataFromFile.close();
+		}
+
+		TEST_METHOD(RegisterAddressFromFile_AutoIncrementOn)
 		{
 			I2C pca(PB_9, PB_8);
 			char data[3] = { 0x00, 0x05, 0xFF };
-			int addressFromFile;
+			int RegisterAddressFromFile;
 			std::string lineFromFile;
 			std::ifstream readDataFromFile("I2CResultsFile.txt");
 			if (!readDataFromFile) Assert::AreEqual("success", "failed");
 			
 			pca.testSetAddressAutoIncrement(true);
 			pca.write(0x64, data, 3);
-			std::getline(readDataFromFile, lineFromFile, '\n');
-			std::getline(readDataFromFile, lineFromFile, '\n');
-			readDataFromFile >> addressFromFile;
-			Assert::AreEqual(0x66, addressFromFile);
+			std::getline(readDataFromFile, lineFromFile, '\n'); //0x64
+			std::getline(readDataFromFile, lineFromFile, '\n'); //0x00 |0x05
+																//0x01 |0xFF
+			readDataFromFile >> RegisterAddressFromFile;
+			Assert::AreEqual(0x01, RegisterAddressFromFile);
 			readDataFromFile.close();
 		}
 
-		TEST_METHOD(AddressFromFile_AutoIncrementOff)
+		TEST_METHOD(RegisterAddressFromFile_AutoIncrementOff)
 		{
 			I2C pca(PB_9, PB_8);
-			char data[3] = { 0x00, 0x05, 0xFF };
-			int addressFromFile;
+			char data[4] = { 0x00, 0x05, 0x10, 0xFF };
+			int RegisterAddressFromFile;
 			std::string lineFromFile;
 			std::ifstream readDataFromFile("I2CResultsFile.txt");
 			if (!readDataFromFile) Assert::AreEqual("success", "failed");
 
 			pca.testSetAddressAutoIncrement(false);
-			pca.write(0x64, data, 3);
-			std::getline(readDataFromFile, lineFromFile, '\n');
-			std::getline(readDataFromFile, lineFromFile, '\n');
-			readDataFromFile >> addressFromFile;
-			Assert::AreEqual(0x64, addressFromFile);
+			pca.write(0x64, data, 4);
+			std::getline(readDataFromFile, lineFromFile, '\n'); //0x64
+			std::getline(readDataFromFile, lineFromFile, '\n'); //0x00 |0x05
+																//0x10 |0xFF
+			readDataFromFile >> RegisterAddressFromFile;
+			Assert::AreEqual(0x10, RegisterAddressFromFile);
 			readDataFromFile.close();
 		}
 
@@ -93,26 +112,23 @@ namespace Stubs
 			I2C pca(PB_9, PB_8);
 			char data[3] = { 0x11, 0x12, 0x13 };
 			int addressFromFile;
+			int registerAddressFromFile;
 			char delimiter;
-			int dataFromFile;
+			int registerDataFromFile;
 			std::string lineFromFile;
 
 			std::ifstream readDataFromFile("I2CResultsFile.txt");
 			if (!readDataFromFile) Assert::AreEqual("success", "failed");
 
+			pca.testSetAddressAutoIncrement(false);
 			pca.write(0x64, data, 3);
 
 			readDataFromFile >> addressFromFile;
+			readDataFromFile >> registerAddressFromFile;
 			readDataFromFile >> delimiter;
-			readDataFromFile >> dataFromFile;
-			Assert::AreEqual(0x11, dataFromFile);
+			readDataFromFile >> registerDataFromFile;
+			Assert::AreEqual(0x12, registerDataFromFile);
 
-			std::getline(readDataFromFile, lineFromFile, '\n');
-			std::getline(readDataFromFile, lineFromFile, '\n');
-			readDataFromFile >> addressFromFile;
-			readDataFromFile >> delimiter;
-			readDataFromFile >> dataFromFile;
-			Assert::AreEqual(0x13, dataFromFile);
 			readDataFromFile.close();
 		}
 

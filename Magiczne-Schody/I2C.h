@@ -55,7 +55,7 @@ public:
 
 
 private:
-	static const int maxDataLength = 16;
+	static const int maxDataLength = 17;
 	char data[maxDataLength];
 	int address;
 	int writeResult;
