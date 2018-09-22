@@ -35,7 +35,7 @@ I2C::~I2C()
 
 int I2C::write(int address, const char * data, int length, bool repeated)
 {
-	std::ofstream saveDataToFile("D:\\I2CResultsFile.txt", std::ios::out);
+	std::ofstream saveDataToFile("I2CResultsFile.txt", std::ios::out);
 	this->address = address;
 	if (length > maxDataLength) length = maxDataLength;
 	for (int i = 0; i < length; i++)

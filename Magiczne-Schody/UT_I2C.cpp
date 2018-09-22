@@ -45,7 +45,7 @@ namespace Stubs
 			char data[3] = { 0x00, 0x05, 0xFF };
 			int addressFromFile;
 			std::string lineFromFile;
-			std::ifstream readDataFromFile("D:\\I2CResultsFile.txt");
+			std::ifstream readDataFromFile("I2CResultsFile.txt");
 			if (!readDataFromFile) Assert::AreEqual("success", "failed");
 			
 			pca.testSetAddressAutoIncrement(true);
@@ -62,7 +62,7 @@ namespace Stubs
 			char data[3] = { 0x00, 0x05, 0xFF };
 			int addressFromFile;
 			std::string lineFromFile;
-			std::ifstream readDataFromFile("D:\\I2CResultsFile.txt");
+			std::ifstream readDataFromFile("I2CResultsFile.txt");
 			if (!readDataFromFile) Assert::AreEqual("success", "failed");
 
 			pca.testSetAddressAutoIncrement(false);
@@ -95,7 +95,7 @@ namespace Stubs
 			int dataFromFile;
 			std::string lineFromFile;
 
-			std::ifstream readDataFromFile("D:\\I2CResultsFile.txt");
+			std::ifstream readDataFromFile("I2CResultsFile.txt");
 			if (!readDataFromFile) Assert::AreEqual("success", "failed");
 
 			pca.write(0x64, data, 3);
