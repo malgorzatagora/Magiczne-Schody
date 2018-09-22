@@ -54,6 +54,7 @@ namespace Stubs
 			std::getline(readDataFromFile, lineFromFile, '\n');
 			readDataFromFile >> addressFromFile;
 			Assert::AreEqual(0x66, addressFromFile);
+			readDataFromFile.close();
 		}
 
 		TEST_METHOD(AddressFromFile_AutoIncrementOff)
@@ -71,6 +72,7 @@ namespace Stubs
 			std::getline(readDataFromFile, lineFromFile, '\n');
 			readDataFromFile >> addressFromFile;
 			Assert::AreEqual(0x64, addressFromFile);
+			readDataFromFile.close();
 		}
 
 		TEST_METHOD(Data)
@@ -111,6 +113,7 @@ namespace Stubs
 			readDataFromFile >> delimiter;
 			readDataFromFile >> dataFromFile;
 			Assert::AreEqual(0x13, dataFromFile);
+			readDataFromFile.close();
 		}
 
 		
