@@ -10,10 +10,13 @@
 								//all 4 PWM channel registers to be loaded
 								//before outputs will change on the last ACK.
 #define MODE2_INVRT		0x10
+#define PRE_SCALE		0xFE	//prescaler for PWM output frequency
+#define LED_FREQ		0x1E	//200 Hz
+#define SERVO_FREQ		0x79	//50 Hz
 //...
 
-/*#define LED0_ON_L		0x06
-#define LED0_ON_H		0x07
+#define LED0_ON_L		0x06
+/*#define LED0_ON_H		0x07
 #define LED0_OFF_L		0x08
 #define LED0_OFF_H		0x09
 */
@@ -24,14 +27,14 @@ public:
 	PCA9685(I2C *i2c, int address);
 	~PCA9685();
 	void Init(void);
-	void SetAllPinsToSpecifiedValues(float *dutyCycleValues);
+	int SetAllPinsToSpecifiedValues(float *dutyCycleValues, int arrayLength);
 
 
 private:
 	I2C * i2c;
 	int address;
-	void SetMode1(int newMode);
-	void SetMode2(int newMode);
+	void SetMode1(char newMode);
+	void SetMode2(char newMode);
 	void SetPWMFreq(int frequency);
 	void Reset(void);
 	void WriteRegister(int registerNumber, int value);
