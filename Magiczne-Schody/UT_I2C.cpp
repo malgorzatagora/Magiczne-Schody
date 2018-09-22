@@ -13,6 +13,7 @@
 #include "CppUnitTest.h"
 #include "mbed.h"
 #include <fstream>
+#include <string>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -38,20 +39,39 @@ namespace Stubs
 			Assert::AreEqual(0x64, pca.testGetAddress());
 		}
 
-		TEST_METHOD(AddressFromFile)
+		TEST_METHOD(AddressFromFile_AutoIncrementOn)
 		{
 			I2C pca(PB_9, PB_8);
 			char data[3] = { 0x00, 0x05, 0xFF };
 			int addressFromFile;
+			std::string lineFromFile;
 			std::ifstream readDataFromFile("D:\\I2CResultsFile.txt");
 			if (!readDataFromFile) Assert::AreEqual("success", "failed");
 			
 			pca.testSetAddressAutoIncrement(true);
 			pca.write(0x64, data, 3);
+			std::getline(readDataFromFile, lineFromFile, '\n');
+			std::getline(readDataFromFile, lineFromFile, '\n');
+			readDataFromFile >> addressFromFile;
+			Assert::AreEqual(0x66, addressFromFile);
+		}
+
+		TEST_METHOD(AddressFromFile_AutoIncrementOff)
+		{
+			I2C pca(PB_9, PB_8);
+			char data[3] = { 0x00, 0x05, 0xFF };
+			int addressFromFile;
+			std::string lineFromFile;
+			std::ifstream readDataFromFile("D:\\I2CResultsFile.txt");
+			if (!readDataFromFile) Assert::AreEqual("success", "failed");
+
+			pca.testSetAddressAutoIncrement(false);
+			pca.write(0x64, data, 3);
+			std::getline(readDataFromFile, lineFromFile, '\n');
+			std::getline(readDataFromFile, lineFromFile, '\n');
 			readDataFromFile >> addressFromFile;
 			Assert::AreEqual(0x64, addressFromFile);
 		}
-
 
 		TEST_METHOD(Data)
 		{
@@ -64,6 +84,35 @@ namespace Stubs
 			Assert::AreEqual(0, pca.testGetData(3));
 			Assert::AreEqual(-1, pca.testGetData(17));
 		}
+
+
+		TEST_METHOD(DataFromFile)
+		{
+			I2C pca(PB_9, PB_8);
+			char data[3] = { 0x11, 0x12, 0x13 };
+			int addressFromFile;
+			char delimiter;
+			int dataFromFile;
+			std::string lineFromFile;
+
+			std::ifstream readDataFromFile("D:\\I2CResultsFile.txt");
+			if (!readDataFromFile) Assert::AreEqual("success", "failed");
+
+			pca.write(0x64, data, 3);
+
+			readDataFromFile >> addressFromFile;
+			readDataFromFile >> delimiter;
+			readDataFromFile >> dataFromFile;
+			Assert::AreEqual(0x11, dataFromFile);
+
+			std::getline(readDataFromFile, lineFromFile, '\n');
+			std::getline(readDataFromFile, lineFromFile, '\n');
+			readDataFromFile >> addressFromFile;
+			readDataFromFile >> delimiter;
+			readDataFromFile >> dataFromFile;
+			Assert::AreEqual(0x13, dataFromFile);
+		}
+
 		
 	};
 }

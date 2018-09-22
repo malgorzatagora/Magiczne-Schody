@@ -68,7 +68,7 @@ namespace CircBuffer_TEST
 				Assert::AreEqual(testArray[i], command[i]);
 				i++;
 			}
-			Assert::AreEqual(5, i);
+			Assert::AreEqual(4, i);
 		}
 
 		TEST_METHOD(GettingCommandWhenBufferEmpty)
