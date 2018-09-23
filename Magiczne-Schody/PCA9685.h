@@ -21,12 +21,18 @@
 #define LED0_OFF_H		0x09
 */
 
+typedef enum PCADriverType
+{
+	LED,
+	SERVO
+}PCADriverType;
+
 class PCA9685
 {
 public:
 	PCA9685(I2C *i2c, int address);
 	~PCA9685();
-	void Init(void);
+	void Init(PCADriverType myConfiguration);
 	int SetAllPinsToSpecifiedValues(float *dutyCycleValues, int arrayLength);
 
 

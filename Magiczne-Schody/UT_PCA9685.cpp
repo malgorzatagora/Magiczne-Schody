@@ -54,7 +54,7 @@ namespace Stubs
 			int registerAddressFromFile;
 			char delimiter;
 			int registerDataFromFile;
-			myPCA.Init();
+			myPCA.Init(LED);
 
 			std::ifstream readDataFromFile("I2CResultsFile.txt");
 			if (!readDataFromFile) Assert::AreEqual("success", "failed");
@@ -84,7 +84,7 @@ namespace Stubs
 			int registerDataFromFile;
 			std::string lineFromFile;
 
-			myPCA.Init();
+			myPCA.Init(LED);
 			myPCA.SetAllPinsToSpecifiedValues(dutyCycleValuesArray, arraySize);
 			
 

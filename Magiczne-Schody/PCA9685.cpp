@@ -40,11 +40,20 @@ void PCA9685::SetPWMFreq(int frequency)
 }
 
 
-void PCA9685::Init(void)
+void PCA9685::Init(PCADriverType myConfiguration)
 {
-	SetPWMFreq(LED_FREQ);
-	SetMode1(MODE1_AI | MODE1_ALLCALL);
-	SetMode2(MODE2_INVRT | MODE2_OCH);
+	if (LED == myConfiguration)
+	{
+		SetPWMFreq(LED_FREQ);
+		SetMode1(MODE1_AI | MODE1_ALLCALL);
+		SetMode2(MODE2_INVRT | MODE2_OCH);
+	}
+	else if (SERVO == myConfiguration)
+	{
+		SetPWMFreq(SERVO_FREQ);
+		//...
+	}
+	else {}
 }
 
 
