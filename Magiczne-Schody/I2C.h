@@ -48,13 +48,18 @@ public:
 		}
 		return result;
 	}
+	inline void testSetAddressAutoIncrement(bool state)
+	{
+		this->addressAutoIncrement = state;
+	}
 
 
 private:
-	static const int maxDataLength = 5;
+	static const int maxDataLength = 65; //16x4+1
 	char data[maxDataLength];
 	int address;
 	int writeResult;
 	PinName sda, scl;
+	bool addressAutoIncrement;
 };
 

@@ -12,6 +12,8 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "mbed.h"
+#include "PCA9685.h"
+#include <fstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -44,8 +46,62 @@ namespace Stubs
 			
 		}
 
+		TEST_METHOD(InitModes)
+		{
+			I2C i2c_pca(PB_9, PB_8);
+			PCA9685 myPCA(&i2c_pca, 0x64);
+			int addressFromFile;
+			int registerAddressFromFile;
+			char delimiter;
+			int registerDataFromFile;
+			myPCA.Init(LED);
 
+			std::ifstream readDataFromFile("I2CResultsFile.txt");
+			if (!readDataFromFile) Assert::AreEqual("success", "failed");
 
+			readDataFromFile >> addressFromFile;
+			readDataFromFile >> registerAddressFromFile;
+			readDataFromFile >> delimiter;
+			readDataFromFile >> registerDataFromFile;
+			Assert::AreEqual(0x64, addressFromFile);
+			Assert::AreEqual(MODE2_ADDRESS, registerAddressFromFile);
+			Assert::AreEqual(0x18, registerDataFromFile);
+
+			readDataFromFile.close();
+		}
+
+		TEST_METHOD(Set16PWMsWithGivenArrayOfValues)
+		{
+			I2C i2c_pca(PB_9, PB_8);
+			PCA9685 myPCA(&i2c_pca, 0x64);
+
+			const int arraySize = 16;
+			float dutyCycleValuesArray[arraySize] = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0, 10, 20, 30, 50, 60 };
+
+			int addressFromFile;
+			int registerAddressFromFile;
+			char delimiter;
+			int registerDataFromFile;
+			std::string lineFromFile;
+
+			myPCA.Init(LED);
+			myPCA.SetAllPinsToSpecifiedValues(dutyCycleValuesArray, arraySize);
+			
+
+			std::ifstream readDataFromFile("I2CResultsFile.txt");
+			if (!readDataFromFile) Assert::AreEqual("success", "failed");
+
+			readDataFromFile >> addressFromFile;
+			for (int i = 0; i < 64; i++) {
+				std::getline(readDataFromFile, lineFromFile, '\n'); //should be 16x4 lines in file
+			}
+			//last line:
+			readDataFromFile >> registerAddressFromFile;
+			readDataFromFile >> delimiter;
+			readDataFromFile >> registerDataFromFile;
+			Assert::AreEqual(0x45, registerAddressFromFile);
+			Assert::AreEqual(0x09, registerDataFromFile);
+		}
 
 
 	};
