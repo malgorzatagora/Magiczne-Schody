@@ -32,7 +32,7 @@ void LightUp::Unsubscribe(Observable *o)
 void LightUp::DoMyJob(Observable *whoToldMeToDoMyJob)
 {
 	 //update my own array
-	this->myArray[this->counter] = 100.0;
+		this->myArray[this->counter] = 100.0;
 
 	
 	//update shared array 

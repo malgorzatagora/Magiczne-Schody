@@ -8,6 +8,7 @@ LightDown::LightDown()
 	{
 		this->myArray[i] = 100.0;
 	}
+	this->counter = 0;
 }
 
 
@@ -35,7 +36,7 @@ void LightDown::DoMyJob(Observable *whoToldMeToDoMyJob)
 	{
 		this->myArray[numberOfStairs-i] = this->myArray[numberOfStairs - i - 1];
 	}
-	this->myArray[0] = (100.0 / numberOfStairs) * (numberOfStairs - this->counter);
+	this->myArray[0] = static_cast<float>(100 - (this->counter)* 10);
 
 	//update shared array 
 	for (int i = 0; i < numberOfStairs; i++)

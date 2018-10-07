@@ -108,7 +108,7 @@ namespace ObserverPatternTest
 			Notifier.NotifyObservers(); //5th step 100%
 
 			Assert::AreEqual(float(100), Observer::arrayWithBrightnessValues[4]);
-
+			
 			Observer2.SubscribeToObservable(&Notifier); //enable lighting down
 
 			Notifier.NotifyObservers(); //6th step 100%, 1st step 90%
