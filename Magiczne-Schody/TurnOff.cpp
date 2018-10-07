@@ -24,7 +24,7 @@ void TurnOff::SubscribeToObservable(Observable *o)
 
 void TurnOff::Unsubscribe(Observable *o)
 {
-	o->DeleteObserver(this);
+	o->UnregisterObserver(this);
 }
 
 void TurnOff::DoMyJob(Observable *whoToldMeToDoMyJob)

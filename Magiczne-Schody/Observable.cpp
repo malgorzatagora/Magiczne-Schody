@@ -29,9 +29,9 @@ void Observable::RegisterNewObserver(Observer *o)
 	}
 }
 
-int Observable::DeleteObserver(Observer *o)
+int Observable::UnregisterObserver(Observer *o)
 {
-	int result;
+	int result = -1;
 	for (int i = 0; i < (this->howManyRegisteredObservers); i++)
 	{
 		if (o == this->observersArray[i])
@@ -43,10 +43,17 @@ int Observable::DeleteObserver(Observer *o)
 				i++;
 			}
 			this->howManyRegisteredObservers--;
+			break;
 		}
 		else { result = -1; }
 	}
+	
 	return result;
+}
+
+void Observable::UnregisterAllObservers(void)
+{
+	this->howManyRegisteredObservers = 0;
 }
 
 

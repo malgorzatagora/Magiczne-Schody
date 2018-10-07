@@ -25,7 +25,7 @@ void LightUp::SubscribeToObservable(Observable *o)
 
 void LightUp::Unsubscribe(Observable *o)
 {
-	o->DeleteObserver(this);
+	o->UnregisterObserver(this);
 }
 
 

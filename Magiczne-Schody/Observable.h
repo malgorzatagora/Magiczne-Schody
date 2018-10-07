@@ -8,7 +8,8 @@ public:
 	Observable();
 	~Observable();
 	void RegisterNewObserver(class Observer *o);
-	int DeleteObserver(class Observer *o);
+	int UnregisterObserver(class Observer *o);
+	void UnregisterAllObservers(void);
 	void NotifyObservers();
 	int CheckWhatToDo();
 	int CheckHowManyObserversRegistered();

@@ -25,7 +25,7 @@ void LightDown::SubscribeToObservable(Observable *o)
 
 void LightDown::Unsubscribe(Observable *o)
 {
-	o->DeleteObserver(this);
+	o->UnregisterObserver(this);
 }
 
 void LightDown::DoMyJob(Observable *whoToldMeToDoMyJob)
