@@ -4,7 +4,10 @@
 
 TurnOff::TurnOff()
 {
-	this->myJobCode = TURN_OFF;
+	for (int i = 0; i < numberOfStairs; i++)
+	{
+		this->myArray[i] = 0;
+	}
 }
 
 
@@ -19,13 +22,21 @@ void TurnOff::SubscribeToObservable(Observable *o)
 	o->RegisterNewObserver(this);
 }
 
-void TurnOff::DoMyJob(int whatToDo, float *workArray, int workArraySize)
+void TurnOff::Unsubscribe(Observable *o)
 {
-	if (whatToDo == (this->myJobCode))
-	{
-		for (int i = 0; i < workArraySize; i++)
-		{
-			workArray[i] = 0;
-		}
-	}
+	o->DeleteObserver(this);
 }
+
+void TurnOff::DoMyJob(Observable *whoToldMeToDoMyJob)
+{
+	//update shared array 
+	for (int i = 0; i < numberOfStairs; i++)
+	{
+		this->arrayWithBrightnessValues[i] = 0;
+	}
+
+	//unsubscrive myself when work done
+	this->Unsubscribe(whoToldMeToDoMyJob);
+}
+	
+

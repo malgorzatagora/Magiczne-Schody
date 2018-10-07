@@ -38,6 +38,9 @@
     <ClCompile Include="UT_ObserverPattern.cpp">
       <Filter>UnitTests</Filter>
     </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />

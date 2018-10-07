@@ -7,9 +7,10 @@ public:
 	LightUp();
 	~LightUp();
 	void SubscribeToObservable(Observable *o);
-	void DoMyJob(int whatToDo, float *workArray, int workArraySize);
+	void Unsubscribe(Observable *o);
+	void DoMyJob(Observable *whoToldMeToDoMyJob);
 
 private:
-	eWhatToDoCode myJobCode;
+	int counter;
 };
 

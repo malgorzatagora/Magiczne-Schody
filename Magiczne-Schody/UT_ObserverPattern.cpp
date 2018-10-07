@@ -18,42 +18,119 @@ namespace ObserverPatternTest
 	TEST_CLASS(ObserverPattern_TEST)
 	{
 	public:
-		TEST_METHOD(OneBigTestToSplitLater)
+		TEST_METHOD(Subscribing)
 		{
-			int infoArray[3] = { 1,2,3 }; // 1-LightUp, 2-LightDown, 3-TurnOff
-			const int workArraysize = 10;
-			float workArray[workArraysize] = {};
 			int numberOfObservers = 0;
 			LightUp Observer1;
 			LightDown Observer2;
 			TurnOff Observer3;
-			Observable Informer;
+			Observable Notifier;
 
-			Observer1.SubscribeToObservable(&Informer);
-			Observer2.SubscribeToObservable(&Informer);
-			Observer3.SubscribeToObservable(&Informer);
+			Observer1.SubscribeToObservable(&Notifier);
+			Observer2.SubscribeToObservable(&Notifier);
+			Observer3.SubscribeToObservable(&Notifier);
 
-			numberOfObservers = Informer.CheckHowManyObserversRegistered();
+			numberOfObservers = Notifier.CheckHowManyObserversRegistered();
 			Assert::AreEqual(3, numberOfObservers);
+		}
 
-			Informer.CheckWhatToDo(&infoArray[0], 0);
-			Informer.NotifyObservers(&workArray[0], workArraysize);
+		TEST_METHOD(NotSubscribingIfAlreadySubsribed)
+		{
+			int numberOfObservers = 0;
+			LightUp Observer1;
+			LightDown Observer2;
+			TurnOff Observer3;
+			Observable Notifier;
 
-			Assert::AreEqual(float(18), workArray[9]);
+			Observer1.SubscribeToObservable(&Notifier);
+			Observer2.SubscribeToObservable(&Notifier);
+			Observer3.SubscribeToObservable(&Notifier);
+			Observer3.SubscribeToObservable(&Notifier);
+			Observer1.SubscribeToObservable(&Notifier);
 
-			Informer.CheckWhatToDo(&infoArray[0], 1);
-			Informer.NotifyObservers(&workArray[0], workArraysize);
+			numberOfObservers = Notifier.CheckHowManyObserversRegistered();
+			Assert::AreEqual(3, numberOfObservers);
+		}
 
-			Assert::AreEqual(float(20), workArray[0]);
-			Assert::AreEqual(float(2), workArray[9]);
 
-			Informer.CheckWhatToDo(&infoArray[0], 2);
-			Informer.NotifyObservers(&workArray[0], workArraysize);
+		TEST_METHOD(Unsubscribing)
+		{
+			int numberOfObservers = 0;
+			LightUp Observer1;
+			LightDown Observer2;
+			TurnOff Observer3;
+			Observable Notifier;
 
-			Assert::AreEqual(float(0), workArray[9]);
+			Observer1.SubscribeToObservable(&Notifier);
+			Observer2.SubscribeToObservable(&Notifier);
+			Observer3.SubscribeToObservable(&Notifier);
 
-			;
+			Observer1.Unsubscribe(&Notifier);
+			Observer3.Unsubscribe(&Notifier);
+
+			numberOfObservers = Notifier.CheckHowManyObserversRegistered();
+			Assert::AreEqual(1, numberOfObservers);
 
 		}
+		TEST_METHOD(NotifyingOneObserver)
+		{
+			LightUp Observer1;
+			Observable Notifier;
+
+			Observer1.SubscribeToObservable(&Notifier);
+
+			Notifier.NotifyObservers();
+
+			Assert::AreEqual(float(100), Observer::arrayWithBrightnessValues[0]);
+			Assert::AreEqual(float(0), Observer::arrayWithBrightnessValues[1]);
+
+			Notifier.NotifyObservers();
+
+			Assert::AreEqual(float(100), Observer::arrayWithBrightnessValues[0]);
+			Assert::AreEqual(float(100), Observer::arrayWithBrightnessValues[1]);
+			Assert::AreEqual(float(0), Observer::arrayWithBrightnessValues[2]);
+
+		}
+
+		TEST_METHOD(NotifyingManyObservers)
+		{
+			LightUp Observer1;
+			LightDown Observer2;
+			TurnOff Observer3;
+			Observable Notifier;
+
+			Observer1.SubscribeToObservable(&Notifier);
+
+			Notifier.NotifyObservers(); //1st step 100%
+			Notifier.NotifyObservers(); //2nd step 100%
+			Notifier.NotifyObservers(); //3rd step 100%
+			Notifier.NotifyObservers(); //4th step 100%
+			Notifier.NotifyObservers(); //5th step 100%
+
+			Assert::AreEqual(float(100), Observer::arrayWithBrightnessValues[4]);
+
+			Observer2.SubscribeToObservable(&Notifier); //enable lighting down
+
+			Notifier.NotifyObservers(); //6th step 100%, 1st step 90%
+
+			Assert::AreEqual(float(100), Observer::arrayWithBrightnessValues[5]);
+			Assert::AreEqual(float(90), Observer::arrayWithBrightnessValues[0]);
+
+			Notifier.NotifyObservers(); //7th step 100%, 1st step 90%, 2nd step 80%
+
+
+			Assert::AreEqual(float(100), Observer::arrayWithBrightnessValues[6]);
+			Assert::AreEqual(float(90), Observer::arrayWithBrightnessValues[1]);
+			Assert::AreEqual(float(80), Observer::arrayWithBrightnessValues[0]);
+
+			Observer3.SubscribeToObservable(&Notifier); //enable turnong off all steps
+
+			Observer1.Unsubscribe(&Notifier);// turning off ligthing up
+			Notifier.NotifyObservers(); //all steps 0%
+
+			Assert::AreEqual(float(0), Observer::arrayWithBrightnessValues[0]);
+			Assert::AreEqual(float(0), Observer::arrayWithBrightnessValues[9]);
+		}
+
 	};
 }

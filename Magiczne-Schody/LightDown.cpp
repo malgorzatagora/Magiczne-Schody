@@ -4,7 +4,10 @@
 
 LightDown::LightDown()
 {
-	this->myJobCode = LIGHT_DOWN;
+	for (int i = 0; i < numberOfStairs; i++)
+	{
+		this->myArray[i] = 100.0;
+	}
 }
 
 
@@ -19,13 +22,33 @@ void LightDown::SubscribeToObservable(Observable *o)
 	o->RegisterNewObserver(this);
 }
 
-void LightDown::DoMyJob(int whatToDo, float *workArray, int workArraySize)
+void LightDown::Unsubscribe(Observable *o)
 {
-	if (whatToDo == (this->myJobCode))
+	o->DeleteObserver(this);
+}
+
+void LightDown::DoMyJob(Observable *whoToldMeToDoMyJob)
+{
+	this->counter++;
+	//update my own array
+	for (int i = 1; i < numberOfStairs; i++)
 	{
-		for (int i = 0; i < workArraySize; i++)
+		this->myArray[numberOfStairs-i] = this->myArray[numberOfStairs - i - 1];
+	}
+	this->myArray[0] = (100.0 / numberOfStairs) * (numberOfStairs - this->counter);
+
+	//update shared array 
+	for (int i = 0; i < numberOfStairs; i++)
+	{
+		if (this->myArray[i] < this->arrayWithBrightnessValues[i])
 		{
-			workArray[i] = (workArraySize - i) * 2.0;
+			this->arrayWithBrightnessValues[i] = this->myArray[i];
 		}
+	}
+
+	//unsubscrive myself when work done
+	if (numberOfStairs == this->counter)
+	{
+		this->Unsubscribe(whoToldMeToDoMyJob);
 	}
 }

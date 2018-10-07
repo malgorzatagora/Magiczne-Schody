@@ -15,8 +15,18 @@ Observable::~Observable()
 
 void Observable::RegisterNewObserver(Observer *o)
 {
-	this->observersArray[howManyRegisteredObservers] = o;
-	this->howManyRegisteredObservers++;
+	bool alreadySubscribed = 0;
+	for (int i = 0; i < (this->howManyRegisteredObservers); i++)
+	{
+		if (o == this->observersArray[i])
+		{
+			alreadySubscribed = 1;
+		}
+	}
+	if (alreadySubscribed == 0) {
+		this->observersArray[howManyRegisteredObservers] = o;
+		this->howManyRegisteredObservers++;
+	}
 }
 
 int Observable::DeleteObserver(Observer *o)
@@ -24,7 +34,7 @@ int Observable::DeleteObserver(Observer *o)
 	int result;
 	for (int i = 0; i < (this->howManyRegisteredObservers); i++)
 	{
-		if (o == observersArray[i])
+		if (o == this->observersArray[i])
 		{
 			result = 0;
 			while (i < (this->howManyRegisteredObservers-1))
@@ -41,32 +51,17 @@ int Observable::DeleteObserver(Observer *o)
 
 
 
-void Observable::NotifyObservers(float *workArray, int workArraySize)
+void Observable::NotifyObservers()
 {
 	for (int i = 0; i < (this->howManyRegisteredObservers); i++)
 	{
-		this->observersArray[i]->DoMyJob(this->whatToDo, workArray, workArraySize);
+		this->observersArray[i]->DoMyJob(this);
 	}
 }
 
-int Observable::CheckWhatToDo(int *infoArray, int index)
+int Observable::CheckWhatToDo()
 {
-	int result = 0;
-	switch (infoArray[index])
-	{
-	default:
-		result = -1;
-		break;
-	case 1:
-		this->whatToDo = LIGHT_UP;
-		break;
-	case 2:
-		this->whatToDo = LIGHT_DOWN;
-		break;
-	case 3:
-		this->whatToDo = TURN_OFF;
-		break;
-	}
+	int result = 1;
 	return result;
 }
 

@@ -7,9 +7,8 @@ public:
 	TurnOff();
 	~TurnOff();
 	void SubscribeToObservable(Observable *o);
-	void DoMyJob(int whatToDo, float *workArray, int workArraySize);
+	void Unsubscribe(Observable *o);
+	void DoMyJob(Observable *whoToldMeToDoMyJob);
 
-private:
-	eWhatToDoCode myJobCode;
 };
 
