@@ -35,8 +35,9 @@ void TurnOff::DoMyJob(Observable *whoToldMeToDoMyJob)
 		this->arrayWithBrightnessValues[i] = 0;
 	}
 
-	//unsubscrive myself when work done
-	this->Unsubscribe(whoToldMeToDoMyJob);
+	//unsubscrive me and others
+	whoToldMeToDoMyJob->UnregisterAllObservers();
+
 }
 	
 
