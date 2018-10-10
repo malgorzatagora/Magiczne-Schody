@@ -84,6 +84,7 @@ namespace ObserverPatternTest
 			LightDown Observer2;
 			LightUp Observer3;
 			Observable Notifier;
+			Observer::arrayWithBrightnessValues[0] = 0;
 
 			Observer1.SubscribeToObservable(&Notifier);
 			Observer2.SubscribeToObservable(&Notifier);
