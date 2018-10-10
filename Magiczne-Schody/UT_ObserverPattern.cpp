@@ -10,11 +10,6 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace ObserverPatternTest
 {
-	bool testVar = 0;
-	void TestCallback(void) {
-		testVar = !testVar;
-	}
-
 	TEST_CLASS(ObserverPattern_TEST)
 	{
 	public:
