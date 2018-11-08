@@ -155,20 +155,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CircularBuffer.h" />
+    <ClInclude Include="DimUp.h" />
     <ClInclude Include="Drivers.h" />
     <ClInclude Include="ICircularBuffer.h" />
     <ClInclude Include="I2C.h" />
     <ClInclude Include="ILEDController.h" />
+    <ClInclude Include="LightDown.h" />
     <ClInclude Include="mbed.h" />
+    <ClInclude Include="Observable.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="LightUp.h" />
     <ClInclude Include="PCA9685.h" />
     <ClInclude Include="PCAMaster.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TurnOff.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CircularBuffer.cpp" />
+    <ClCompile Include="DimUp.cpp" />
     <ClCompile Include="Drivers.cpp" />
     <ClCompile Include="I2C.cpp" />
+    <ClCompile Include="LightDown.cpp" />
+    <ClCompile Include="Observable.cpp" />
+    <ClCompile Include="LightUp.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PCA9685.cpp" />
     <ClCompile Include="PCAMaster.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -177,10 +188,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TurnOff.cpp" />
     <ClCompile Include="unittest1.cpp" />
     <ClCompile Include="UT_CircularBuffer.cpp" />
     <ClCompile Include="UT_Drivers.cpp" />
     <ClCompile Include="UT_I2C.cpp" />
+    <ClCompile Include="UT_ObserverPattern.cpp" />
     <ClCompile Include="UT_PCA9685.cpp" />
     <ClCompile Include="UT_PCAMaster.cpp" />
   </ItemGroup>
