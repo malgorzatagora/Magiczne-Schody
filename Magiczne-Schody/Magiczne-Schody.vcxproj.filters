@@ -23,6 +23,27 @@
     <ClCompile Include="UT_CircularBuffer.cpp">
       <Filter>UnitTests</Filter>
     </ClCompile>
+    <ClCompile Include="Observable.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LightUp.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LightDown.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TurnOff.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UT_ObserverPattern.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DimUp.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -43,6 +64,24 @@
       <Filter>Stubs</Filter>
     </ClInclude>
     <ClInclude Include="PCA9685.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Observable.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LightUp.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LightDown.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnOff.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DimUp.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
