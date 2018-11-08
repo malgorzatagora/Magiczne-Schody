@@ -23,6 +23,12 @@
     <ClCompile Include="UT_CircularBuffer.cpp">
       <Filter>UnitTests</Filter>
     </ClCompile>
+    <ClCompile Include="PCAMaster.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UT_PCAMaster.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
     <ClCompile Include="Observable.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -64,6 +70,9 @@
       <Filter>Stubs</Filter>
     </ClInclude>
     <ClInclude Include="PCA9685.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PCAMaster.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Observable.h">
