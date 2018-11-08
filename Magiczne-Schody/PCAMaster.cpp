@@ -2,12 +2,11 @@
 #include "PCAMaster.h"
 
 
-PCAMaster::PCAMaster(int howManyStairs, PCA9685 * arrayOfAvaliablePCAs)
+PCAMaster::PCAMaster(int howManyStairs, PCA9685 * arrayOfAvaliablePCAs, int arraySize)
 {
 	
-	int numberOfPinsInPCA = 16;
 	this->numberOfPCAs = (howManyStairs / numberOfPinsInPCA);
-	if ((howManyStairs % 16) != 0){
+	if ((howManyStairs % numberOfPinsInPCA) != 0){
 		this->numberOfPCAs++;
 	}
 

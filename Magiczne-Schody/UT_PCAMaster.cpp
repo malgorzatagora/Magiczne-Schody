@@ -32,7 +32,7 @@ namespace MagiczneSchody
 			PCA9685 myPCA4(&i2c_pca, PCA4_ADDRESS);
 			PCA9685 arrayOfAvailablePCAs[4] = { myPCA1, myPCA2, myPCA3, myPCA4 };
 			int numberOfStairs = 35;
-			PCAMaster myPCAs(numberOfStairs, arrayOfAvailablePCAs);
+			PCAMaster myPCAs(numberOfStairs, arrayOfAvailablePCAs, COUNT_OF(arrayOfAvailablePCAs));
 
 			Assert::AreEqual(3, myPCAs.NumberOfPCAs());
 		}
@@ -46,7 +46,7 @@ namespace MagiczneSchody
 			PCA9685 myPCA4(&i2c_pca, PCA4_ADDRESS);
 			PCA9685 arrayOfAvailablePCAs[4] = { myPCA1, myPCA2, myPCA3, myPCA4 };
 			int numberOfStairs = 35;
-			PCAMaster myPCAs(numberOfStairs, arrayOfAvailablePCAs);
+			PCAMaster myPCAs(numberOfStairs, arrayOfAvailablePCAs, COUNT_OF(arrayOfAvailablePCAs));
 			int addressFromFile;
 			int registerAddressFromFile;
 			char delimiter;
@@ -76,7 +76,7 @@ namespace MagiczneSchody
 			PCA9685 myPCA4(&i2c_pca, PCA4_ADDRESS);
 			PCA9685 arrayOfAvailablePCAs[4] = { myPCA1, myPCA2, myPCA3, myPCA4 };
 			const int numberOfStairs = 35;
-			PCAMaster myPCAs(numberOfStairs, arrayOfAvailablePCAs);
+			PCAMaster myPCAs(numberOfStairs, arrayOfAvailablePCAs, COUNT_OF(arrayOfAvailablePCAs));
 
 			float dutyCycleValuesArray[numberOfStairs] = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0, 10, 20, 30, 50, 60, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0, 10, 20, 30, 50, 60, 10, 20, 30 };
 

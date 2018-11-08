@@ -5,12 +5,13 @@
 #define PCA2_ADDRESS	0x82
 #define PCA3_ADDRESS	0x84
 #define PCA4_ADDRESS	0x88
-
+#define COUNT_OF(array) (sizeof(array) / sizeof(array[0]))
+static const int numberOfPinsInPCA = 16;
 
 class PCAMaster
 {
 public:
-	PCAMaster(int howManyStairs, PCA9685 * arrayOfAvaliablePCAs);
+	PCAMaster(int howManyStairs, PCA9685 * arrayOfAvaliablePCAs, int arraySize);
 	~PCAMaster();
 	void InitAllPCAs(PCADriverType myConfiguration);
 	void UpdateAllPCAs(float *dutyCycleValuesForAllStairs, char howManyStairs);
