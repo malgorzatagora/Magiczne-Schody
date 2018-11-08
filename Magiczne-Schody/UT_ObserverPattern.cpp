@@ -67,8 +67,9 @@ namespace ObserverPatternTest
 			Assert::AreEqual(1, numberOfObservers);
 
 			Notifier.NotifyObservers();
+			Notifier.NotifyObservers();
 
-			Assert::AreEqual(static_cast<float>(100), Observer::arrayWithBrightnessValues[0]);
+			Assert::AreEqual(static_cast<float>(0.4), Observer::arrayWithBrightnessValues[0]);
 		}
 
 
@@ -106,14 +107,14 @@ namespace ObserverPatternTest
 
 			Notifier.NotifyObservers();
 
-			Assert::AreEqual(static_cast<float>(100), Observer::arrayWithBrightnessValues[0]);
-			Assert::AreEqual(static_cast<float>(0), Observer::arrayWithBrightnessValues[1]);
+			Assert::AreEqual(static_cast<float>(0), Observer::arrayWithBrightnessValues[0]);
+			Assert::AreEqual(static_cast<float>(0), Observer::arrayWithBrightnessValues[3]);
 
 			Notifier.NotifyObservers();
 
-			Assert::AreEqual(static_cast<float>(100), Observer::arrayWithBrightnessValues[0]);
-			Assert::AreEqual(static_cast<float>(100), Observer::arrayWithBrightnessValues[1]);
-			Assert::AreEqual(static_cast<float>(0), Observer::arrayWithBrightnessValues[2]);
+			Assert::AreEqual(static_cast<float>(0.4), Observer::arrayWithBrightnessValues[0]);
+			Assert::AreEqual(static_cast<float>(0), Observer::arrayWithBrightnessValues[3]);
+			Assert::AreEqual(static_cast<float>(0), Observer::arrayWithBrightnessValues[15]);
 
 		}
 
@@ -126,27 +127,22 @@ namespace ObserverPatternTest
 
 			Observer1.SubscribeToObservable(&Notifier);
 
-			Notifier.NotifyObservers(); //1st step 100%
-			Notifier.NotifyObservers(); //2nd step 100%
-			Notifier.NotifyObservers(); //3rd step 100%
-			Notifier.NotifyObservers(); //4th step 100%
-			Notifier.NotifyObservers(); //5th step 100%
+			Notifier.NotifyObservers(); //0 step = 0%
+			Notifier.NotifyObservers(); //0 step = 0.4%
+			Notifier.NotifyObservers(); //0 step = 0.8%
+			Notifier.NotifyObservers(); //0 step = 1.2%
+			Notifier.NotifyObservers(); //0 step = 1.6%
 
-			Assert::AreEqual(static_cast<float>(100), Observer::arrayWithBrightnessValues[4]);
+			Assert::AreEqual(static_cast<float>(1.6), Observer::arrayWithBrightnessValues[0]);
 			
 			Observer2.SubscribeToObservable(&Notifier); //enable lighting down
 
-			Notifier.NotifyObservers(); //6th step 100%, 1st step 90%
+			Notifier.NotifyObservers(); //0 step = 2.0%, 15th step =  0%
+			Notifier.NotifyObservers(); //0 step = 2.4%, 15th step =  0.4%
 
-			Assert::AreEqual(static_cast<float>(100), Observer::arrayWithBrightnessValues[5]);
-			Assert::AreEqual(static_cast<float>(90), Observer::arrayWithBrightnessValues[0]);
+			Assert::AreEqual(static_cast<float>(0.4), Observer::arrayWithBrightnessValues[15]);
+			Assert::AreEqual(static_cast<float>(2.4), Observer::arrayWithBrightnessValues[0]);
 
-			Notifier.NotifyObservers(); //7th step 100%, 1st step 90%, 2nd step 80%
-
-
-			Assert::AreEqual(static_cast<float>(100), Observer::arrayWithBrightnessValues[6]);
-			Assert::AreEqual(static_cast<float>(90), Observer::arrayWithBrightnessValues[1]);
-			Assert::AreEqual(static_cast<float>(80), Observer::arrayWithBrightnessValues[0]);
 
 			Observer3.SubscribeToObservable(&Notifier); //enable turnong off all steps
 

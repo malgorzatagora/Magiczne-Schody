@@ -4,11 +4,7 @@
 
 LightDown::LightDown()
 {
-	for (int i = 0; i < numberOfStairs; i++)
-	{
-		this->myArray[i] = 100.0;
-	}
-	this->counter = 0;
+	this->counter = -50;
 }
 
 
@@ -20,6 +16,11 @@ LightDown::~LightDown()
 
 void LightDown::SubscribeToObservable(Observable *o)
 {
+	for (int i = 0; i < numberOfStairs; i++)
+	{
+		this->myArray[i] = 0;
+	}
+	this->counter = -50;
 	o->RegisterNewObserver(this);
 }
 
@@ -30,26 +31,29 @@ void LightDown::Unsubscribe(Observable *o)
 
 void LightDown::DoMyJob(Observable *whoToldMeToDoMyJob)
 {
-	this->counter++;
-	//update my own array
-	for (int i = 1; i < numberOfStairs; i++)
-	{
-		this->myArray[numberOfStairs-i] = this->myArray[numberOfStairs - i - 1];
-	}
-	this->myArray[0] = static_cast<float>(100 - (this->counter)* 10);
-
-	//update shared array 
-	for (int i = 0; i < numberOfStairs; i++)
-	{
-		if (this->myArray[i] < this->arrayWithBrightnessValues[i])
-		{
-			this->arrayWithBrightnessValues[i] = this->myArray[i];
-		}
-	}
-
 	//unsubscrive myself when work done
-	if (numberOfStairs == this->counter)
+	if (50 <= this->counter)
 	{
 		this->Unsubscribe(whoToldMeToDoMyJob);
 	}
+	else
+	{
+		//update my own array 
+		for (int x = 0; x < numberOfStairs; x++)
+		{
+			this->myArray[x] = LinearFunction(x, 50.0 / 15.0, this->counter);
+		}
+
+		//update shared array 
+		for (int i = 0; i < numberOfStairs; i++)
+		{
+			if (this->myArray[i] > this->arrayWithBrightnessValues[i])
+			{
+				this->arrayWithBrightnessValues[i] = this->myArray[i];
+			}
+		}
+
+		this->counter += 0.4;
+	}
+
 }

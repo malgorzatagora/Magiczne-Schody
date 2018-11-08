@@ -37,7 +37,7 @@ int Observable::UnregisterObserver(Observer *o)
 		if (o == this->observersArray[i])
 		{
 			result = 0;
-			while (i < (this->howManyRegisteredObservers-1))
+			while (i < (this->howManyRegisteredObservers - 1))
 			{
 				this->observersArray[i] = this->observersArray[i + 1];
 				i++;
@@ -47,7 +47,7 @@ int Observable::UnregisterObserver(Observer *o)
 		}
 		else { result = -1; }
 	}
-	
+
 	return result;
 }
 

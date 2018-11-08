@@ -11,6 +11,6 @@ public:
 	void DoMyJob(Observable *whoToldMeToDoMyJob);
 
 private:
-	int counter;
+	double counter;
 };
 

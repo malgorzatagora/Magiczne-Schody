@@ -1,7 +1,7 @@
 #pragma once
 #include "Observable.h"
 
-static const int numberOfStairs = 10;
+static const int numberOfStairs = 16;
 
 class Observer
 {
@@ -13,6 +13,8 @@ public:
 
 protected:
 	float myArray[numberOfStairs];
+	double LinearFunction(int x, double a, double b);
+	double SquareFunction(int x, double a, double b, double c);
 
 };
 

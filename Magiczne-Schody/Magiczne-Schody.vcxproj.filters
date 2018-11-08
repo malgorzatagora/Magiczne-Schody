@@ -41,6 +41,9 @@
     <ClCompile Include="Observer.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="DimUp.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -76,6 +79,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="TurnOff.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DimUp.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

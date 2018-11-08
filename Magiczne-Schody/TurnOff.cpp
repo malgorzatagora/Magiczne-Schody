@@ -39,5 +39,5 @@ void TurnOff::DoMyJob(Observable *whoToldMeToDoMyJob)
 	whoToldMeToDoMyJob->UnregisterAllObservers();
 
 }
-	
+
 

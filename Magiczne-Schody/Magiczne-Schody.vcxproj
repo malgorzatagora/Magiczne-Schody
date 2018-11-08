@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CircularBuffer.h" />
+    <ClInclude Include="DimUp.h" />
     <ClInclude Include="Drivers.h" />
     <ClInclude Include="ICircularBuffer.h" />
     <ClInclude Include="I2C.h" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CircularBuffer.cpp" />
+    <ClCompile Include="DimUp.cpp" />
     <ClCompile Include="Drivers.cpp" />
     <ClCompile Include="I2C.cpp" />
     <ClCompile Include="LightDown.cpp" />

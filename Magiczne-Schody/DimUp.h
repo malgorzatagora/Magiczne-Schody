@@ -1,11 +1,11 @@
 #pragma once
 #include "Observer.h"
 
-class LightDown : public Observer
+class DimUp : public Observer
 {
 public:
-	LightDown();
-	~LightDown();
+	DimUp();
+	~DimUp();
 	void SubscribeToObservable(Observable *o);
 	void Unsubscribe(Observable *o);
 	void DoMyJob(Observable *whoToldMeToDoMyJob);
